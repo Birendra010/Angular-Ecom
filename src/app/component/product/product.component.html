@@ -1,0 +1,27 @@
+
+<div class="card " >
+ <img src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"  >
+ <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-pro-max-1.jpg" >
+</div>
+
+<div *ngFor="let p of products" class="card"  >
+    <img class="image" src="{{p.thumbnail}}">
+    <span>{{p.title }}</span>
+    <span>{{p.price}}</span>
+    <!-- <span>${{p.brand}}</span> -->
+    <!-- <span>{{p.category }}</span> -->
+    <span class=" col-2 text-truncate">{{p.description }}</span>
+    <!-- <span>{{p.rating }}</span> -->
+
+
+
+   
+</div> 
+
+
+
+
+
+
+
+  
