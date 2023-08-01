@@ -10,14 +10,17 @@ import { LoginComponent } from './component/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './component/header/header.component';
 import { ProductComponent } from './component/product/product.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './component/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, LoginComponent, HeaderComponent, ProductComponent],
+  declarations: [AppComponent, SignupComponent, LoginComponent, HeaderComponent, ProductComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

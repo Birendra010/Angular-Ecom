@@ -6,10 +6,18 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ProductService {
-  url = 'https://dummyjson.com/products';
+  url = 'http://192.168.1.76:5000';
 
   constructor(private http: HttpClient) {}
-  products() {
-    return this.http.get(this.url);
+  productList() {
+    return this.http.get(this.url + '/products');
+  }
+
+  popularProducts() {
+    return this.http.get(this.url + '/popular-products');
+  }
+
+  limitedProducts() {
+    return this.http.get(this.url + '/limited-products');
   }
 }

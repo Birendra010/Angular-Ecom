@@ -7,6 +7,7 @@ import {
   FormControl,
   AbstractControl,
 } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'signup',
@@ -15,12 +16,14 @@ import {
 })
 export class SignupComponent {
   signupForm!: FormGroup;
-
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+ integerRegex=/^\d+$/
+  constructor(private fb: FormBuilder, private http: HttpClient ,private userService:UserService) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(32)]),
+      mobile: new FormControl('', [Validators.required, Validators.maxLength(10),Validators.minLength(10),Validators.pattern(this.integerRegex)]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
       
     });
@@ -38,11 +41,12 @@ export class SignupComponent {
 
     const formData = this.signupForm.value;
     // 'YOUR_BACKEND_API_URL' 
-    const apiUrl = '';
+    // const apiUrl = 'signUp';
 
-    this.http.post(apiUrl, formData).subscribe(
+    this.userService.Signup(formData).subscribe(
       (response) => {
         console.log('Signup successful:', response);
+        
       },
       (error) => {
         console.error('Signup failed:', error);

@@ -1,0 +1,8 @@
+.container {
+    height: max-content;
+    width: 450px;
+}
+
+.error {
+    border: 0.5px solid red;
+}

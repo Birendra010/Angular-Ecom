@@ -1,29 +1,72 @@
-<div class="container mt-4  border border-dark  ">
- <h1 class="text-center text-black mb-2">signUp</h1>
+<div class="container mt-5  border border-dark  shadow-lg p-3  bg-secondary rounded  ">
+    <h1 class="text-center text-white mb-2">Signup</h1>
 
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-   <div class="mb-3 ">
-    <label for="email" class="Form-label"> Email</label>
-    <input type="email" class="form-control"id="email" placeholder="email" formControlName="email" [ngClass]="{error:getControl('email')?.errors  && getControl('email')?.touched}" >
-    <div *ngIf="getControl('email')?.errors && getControl('email')?.touched">
-        <small class="text-danger" *ngIf="getControl('email')?.errors?.['required']">Email is required. </small>
-        <small class="text-danger" *ngIf="getControl('email')?.errors?.['pattern']">Please enter a valid email. </small>
+
+
+
+
+        <div class="mb-3 text-white">
+            <label for="name" class="Form-label"> Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name"
+                [ngClass]="{error:getControl('name')?.errors  && getControl('name')?.touched}">
+            <div *ngIf="getControl('name')?.errors && getControl('name')?.touched">
+                <small class="text-danger" *ngIf="getControl('name')?.errors?.['required']">Name is required. </small>
+                <small class="text-danger" *ngIf="getControl('name')?.errors?.['maxlength']">Only 32 characters are
+                    allowed.
+                </small>
+                <small class="text-danger" *ngIf="getControl('name')?.errors?.['minlength']">Minimum 3 characters are
+                    required.
+                </small>
+            </div>
+        </div>
+
+
+
+
+<div class="mb-3 text-white">
+    <label for="mobile" class="Form-label"> Mobile</label>
+    <input type="text" class="form-control" id="mobile" placeholder="mobile" formControlName="mobile"
+        [ngClass]="{error:getControl('mobile')?.errors  && getControl('mobile')?.touched}">
+    <div *ngIf="getControl('mobile')?.errors && getControl('mobile')?.touched">
+        <small class="text-danger" *ngIf="getControl('mobile')?.errors?.['required']">Mobile no. is required. </small>
+        <small class="text-danger"
+            *ngIf="getControl('mobile')?.errors?.['maxlength'] || getControl('mobile')?.errors?.['minlength'] || getControl('mobile')?.errors?.['pattern'] ">Please
+            enter a valid mobile no.</small>
     </div>
 
 </div>
-   <div class="mb-3 ">
-    <label for="password" class="Form-label"> Password</label>
-    <input type="password" class="form-control"id="password" placeholder="password" formControlName="password" [ngClass]="{error:getControl('password')?.errors  && getControl('password')?.touched}">
-    <div *ngIf="getControl('password')?.errors && getControl('password')?.touched">
-        <small class="text-danger" *ngIf="getControl('password')?.errors?.['required']">Password is required. </small>
-<small class="text-danger" *ngIf="getControl('password')?.errors?.['maxlength'] || getControl('password')?.errors?.['minlength'] ">Password should be Minimum 8 and Maximum 32 characters long</small>
-       
-    
-    </div>
-</div>
-<div class="text-center">
-    <button type="submit" class="btn btn-primary " [disabled]="signupForm.invalid">Sign Up</button>
- </div>
-  </form>
+
+        <div class="mb-3  text-white">
+            <label for="email" class="Form-label"> Email</label>
+            <input type="email" class="form-control" id="email" placeholder="email" formControlName="email"
+                [ngClass]="{error:getControl('email')?.errors  && getControl('email')?.touched}">
+            <div *ngIf="getControl('email')?.errors && getControl('email')?.touched">
+                <small class="text-danger" *ngIf="getControl('email')?.errors?.['required']">Email is required. </small>
+                <small class="text-danger" *ngIf="getControl('email')?.errors?.['pattern']">Please enter a valid email.
+                </small>
+            </div>
+
+        </div>
+        <div class="mb-3 text-white">
+            <label for="password" class="Form-label"> Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" formControlName="password"
+                [ngClass]="{error:getControl('password')?.errors  && getControl('password')?.touched}">
+            <div *ngIf="getControl('password')?.errors && getControl('password')?.touched">
+                <small class="text-danger" *ngIf="getControl('password')?.errors?.['required']">Password is required.
+                </small>
+                <small class="text-danger"
+                    *ngIf="getControl('password')?.errors?.['maxlength'] || getControl('password')?.errors?.['minlength'] ">Password
+                    should be Minimum 8 and Maximum 32 characters long</small>
+
+
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary " [disabled]="signupForm.invalid">Sign Up</button>
+        </div>
+    </form>
 </div>

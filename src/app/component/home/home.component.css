@@ -1,0 +1,31 @@
+.product-header-img{
+
+    object-fit: contain;
+    height: 600px;
+    width: 100%;
+}
+
+
+.carousel-caption{
+    background-color: #000000B2;
+    border-radius: 5px;
+}
+
+
+img {
+    height: 7rem;
+    width: 75%;
+}
+
+.card {
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.bi {
+    color: blue;
+
+}

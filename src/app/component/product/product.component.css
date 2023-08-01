@@ -1,9 +1,21 @@
 
 
-.image{
-    height: 10rem; width: 12rem;
+img{
+    height: 7rem; width:75%;
 }
 
-/* .card img{
+.card{
+    transition: all 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.bi{
+    color: blue;
     
-} */
+}
+
+
+
