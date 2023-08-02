@@ -25,7 +25,7 @@
     <div class="container-fluid">
       
       <div class="row row-cols-2 row-cols-sm-4 mt-4 g-3  ">
-        <div class="col p-2 " *ngFor="let p of products">
+        <div class="col p-2 " *ngFor="let p of products" [routerLink]="['/products',p._id]">
           
           <div  class="card mx-auto  shadow-lg p-3  bg-white rounded ">
             <img class="card-img-top " src="{{p.thumbnail}}">

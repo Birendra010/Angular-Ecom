@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent {
+  images:string=''
   products: any;
   constructor(private productData: ProductService) {
     this.productData.productList().subscribe((data: any) => {
@@ -17,4 +18,5 @@ export class ProductComponent {
       // console.log(data);
     });
   }
+ 
 }

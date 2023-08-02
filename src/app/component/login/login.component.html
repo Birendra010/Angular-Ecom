@@ -1,9 +1,9 @@
 <div class="container mt-5  border border-dark  shadow-lg p-3  bg-secondary rounded  ">
     <h1 class="text-center text-white mb-2">Login</h1>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <div class="mb-3  text-white">
+            <!-- <div class="mb-3  text-white">
                 <label for="email" class="Form-label"> Email</label>
                 <input type="email" class="form-control" id="email" placeholder="email" formControlName="email"
                     [ngClass]="{error:getControl('email')?.errors  && getControl('email')?.touched}">
@@ -13,8 +13,37 @@
                     </small>
                 </div>
             
-            </div>
-            <div class="mb-3 text-white">
+            </div> -->
+
+
+<div class="mb-3 text-white">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" placeholder="email" formControlName="email" />
+    <div *ngIf="email && email.touched" class="text-danger">
+        <span *ngIf="email.errors?.['required'] ">Enter email</span>
+        <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
+    </div>
+</div>
+
+
+
+
+
+<div class="mb-3 text-white">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+    <div *ngIf="password && password.touched" class="text-danger">
+        <span *ngIf="password.errors?.['required'] ">Enter password</span>
+        <span *ngIf="password.errors?.['minlength'] || password.errors?.['pattern'] ">
+            Password length should be min 6
+        </span>
+    </div>
+</div>
+
+
+
+
+            <!-- <div class="mb-3 text-white">
                 <label for="password" class="Form-label"> Password</label>
                 <input type="password" class="form-control" id="password" placeholder="password" formControlName="password"
                     [ngClass]="{error:getControl('password')?.errors  && getControl('password')?.touched}">
@@ -27,11 +56,11 @@
             
             
                 </div>
-            </div>
+            </div> -->
             
             
             <div class="text-center">
-                <button type="submit" class="btn btn-primary " [disabled]="loginForm.invalid">Sign Up</button>
+                <button type="submit" class="btn btn-primary " [disabled]="form.invalid">Login</button>
             </div>
             </form>
             </div>
