@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./productdetails.component.css'],
 })
 export class ProductdetailsComponent implements OnInit {
-  product: any;
+  product: undefined | Product;
   image: string = '';
   constructor(
     private router: ActivatedRoute,
@@ -29,4 +30,6 @@ export class ProductdetailsComponent implements OnInit {
   showimage(url:string) {
     this.image=url
   }
+
+
 }

@@ -1,57 +1,38 @@
 <div>
+  <ngb-carousel *ngIf="popularProducts" class="mt-5">
+    <ng-template *ngFor="let item of popularProducts" ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img
+          class="product-header-img w-100"
+          src="{{ item.thumbnail }}"
+          alt="Random first slide"
+        />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ item.brand }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 
+  <div class="container-fluid">
+    <div class="row row-cols-2 row-cols-sm-4 mt-4 g-3">
+      <div class="col p-2" *ngFor="let p of HomeProducts">
+        <div class="card mx-auto shadow-lg p-3 bg-white rounded" (click)="productPage(p._id)">
+          <img class="card-img-top" src="{{ p.thumbnail }}" />
+          <!-- <span>{{p.title }}</span> -->
+          <span>{{ p.brand }}</span>
+          <span class="text-truncate">{{ p.description }}</span>
 
-	<ngb-carousel *ngIf="popularProducts" class="mt-5">
-		<ng-template *ngFor="let item of popularProducts" ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img class="product-header-img" src="{{item.thumbnail}}" alt="Random first slide" />
-			</div>
-			<div class="carousel-caption">
-				<h3>{{item.brand}}</h3>
-				<p>{{item.description}} </p>
-			</div>
-		</ng-template>
+          <div class="p-2 d-flex flex-row justify-content-between">
+            <span>${{ p.price }}</span>
+            <span class="bi bi-star">{{ p.rating }}</span>
+          </div>
+          <!-- <span>{{p.category }}</span> -->
+        </div>
+      </div>
+    </div>
 
-	</ngb-carousel>
-
-
-
-
-
-
-
-	<div class="container-fluid">
-
-		<div class="row row-cols-2 row-cols-sm-4 mt-4 g-3 ">
-			<div class="col p-2" *ngFor="let p of HomeProducts">
-
-				<div class="card mx-auto  shadow-lg p-3  bg-white rounded  ">
-					<img class="card-img-top " src="{{p.thumbnail}}">
-					<!-- <span>{{p.title }}</span> -->
-					<span>{{p.brand}}</span>
-					<span class=" text-truncate">{{p.description }}</span>
-
-					<div class=" p-2 d-flex flex-row justify-content-between">
-						<span>${{p.price}}</span>
-						<span class="bi bi-star">{{p.rating }}</span>
-
-					</div>
-					<!-- <span>{{p.category }}</span> -->
-
-				</div>
-			</div>
-
-		</div>
-
-		<footer class="bg-dark py-5 mt-5">
-			<div class="container text-light text-center">
-				<p class="display-5 mb-3">Best selling products</p>
-				<small class="text-white-50">&copy; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-					minima! Dolores fugit rem assumenda consectetur fugiat voluptatibus omnis odit culpa adipisci
-					temporibus aliquam enim, nam eligendi explicabo quos magni eaque.</small>
-			</div>
-
-
-		</footer>
-	</div>
+   
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -12,21 +13,21 @@ export class HomeComponent implements OnInit {
   popularProducts: Product[] = [];
   HomeProducts: any;
 
-  constructor(private product: ProductService) { 
-
-
-     this.product.limitedProducts().subscribe((data: any) => {
-       this.HomeProducts = data.products;
-       // console.log(data);
-     });
+  constructor(private product: ProductService, private router: Router) {
+    this.product.limitedProducts().subscribe((data: any) => {
+      this.HomeProducts = data.products;
+      // console.log(data);
+    });
   }
-  
-  
 
   ngOnInit() {
-    this.product.popularProducts().subscribe((data:any) => {
+    this.product.popularProducts().subscribe((data: any) => {
       // console.log(data);
       this.popularProducts = data.products;
     });
+  }
+
+  productPage(id:string) {
+    this.router.navigate(['/products' ,id]);
   }
 }

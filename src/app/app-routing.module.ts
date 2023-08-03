@@ -6,6 +6,8 @@ import { ProductComponent } from './component/product/product.component';
 import { HomeComponent } from './component/home/home.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { ProductdetailsComponent } from './component/product/productdetails/productdetails.component';
+import { CartComponent } from './component/cart/cart.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { component: HomeComponent, path: 'home' },
@@ -13,8 +15,8 @@ const routes: Routes = [
   { component: LoginComponent, path: 'login' },
   { component: ProductComponent, path: 'products' },
   { component: ProductdetailsComponent, path: 'products/:id' },
-
   { component: ContactUsComponent, path: 'contact' },
+  {component: CartComponent,path: 'cart',canActivate: [AuthGuard]},
 ];
 
 @NgModule({

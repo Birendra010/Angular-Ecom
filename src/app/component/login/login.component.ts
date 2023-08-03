@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators,FormGroup, AbstractControl, } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent {
   // loginForm!: FormGroup;
-  constructor(private userService:UserService) {}
+  constructor(private userService:UserService ,private router:Router) {}
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,6 +30,18 @@ export class LoginComponent {
   onSubmit() {
    this.userService.login(this.form.value)
   }
+
+
+  login() {
+    this.userService.login(this.form.value)
+    // this.router.navigate(['/cart'])
+}
+
+//   logout() {
+//   this.userService.logout
+// }
+
+  
 }
 
 

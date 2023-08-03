@@ -36,9 +36,7 @@ export class SignupComponent {
     ]),
   });
 
-  // get f() {
-  //   return this.form.controls;
-  // }
+
 
   get name() {
     return this.form.get('name');

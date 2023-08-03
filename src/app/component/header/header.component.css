@@ -1,12 +1,36 @@
 .margin-left {
-    margin-left: 30px !important;
+  margin-left: 30px !important;
 }
 
-.navbar{
-    background-color:#3dc1c8;
+.navbar {
+  background-color: #3dc1c8;
 }
 
-.bi{
-   font-size:x-large;
-padding-left: 10px;
+.bi {
+  font-size: x-large;
+  padding-left: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1e8e8;
+  height: 5rem;
+  width: 8rem;
+
+  left: -20px;
+
+  border-style: solid;
+  border-width: 0.5px;
+
+  padding-left: 7px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

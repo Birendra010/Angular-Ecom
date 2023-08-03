@@ -16,6 +16,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './component/home/home.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { ProductdetailsComponent } from './component/product/productdetails/productdetails.component';
+import { CartComponent } from './component/cart/cart.component';
+import { FooterComponent } from './component/footer/footer.component';
+// import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+// import { SearchComponent } from './component/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { ProductdetailsComponent } from './component/product/productdetails/prod
     HomeComponent,
     ContactUsComponent,
     ProductdetailsComponent,
+    CartComponent,
+    FooterComponent,
+    // ForgotPasswordComponent,
+    // SearchComponent,
   ],
   imports: [
     BrowserModule,
