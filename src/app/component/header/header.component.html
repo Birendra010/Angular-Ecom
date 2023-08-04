@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse d-flex flex-md-row" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
         <li class="nav-item">
-          <button class="nav-link active" routerLink="/home">Home</button>
+          <button class="nav-link active" routerLink="/">Home</button>
         </li>
 
         <!-- <li class="nav-item margin-left">
@@ -25,7 +25,6 @@
       <div>
         <i class="bi bi-person-circle dropdown  ">
           <div class="dropdown-content">
-            <!-- <li class="nav-item margin-left"> -->
             <button class="nav-link active" style="color: rgb(124, 124, 236); font-size: 20px" *ngIf="!loggedIn"
               routerLink="/login">
               Login
@@ -48,7 +47,9 @@
         </i>
       </div>
       <div>
-        <i class="bi bi-cart-plus mt-5"></i>
+        <i class="bi bi-cart-plus mt-5" title="Cart" style="cursor: pointer   "  routerLink="/cart" >
+        {{count}}
+        </i>
       </div>
     </div>
   </div>

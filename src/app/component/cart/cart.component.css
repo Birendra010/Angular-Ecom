@@ -1,0 +1,154 @@
+/* 
+.loader {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.p-4 {
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+
+.text-center {
+  color: #888;
+}
+
+
+.border {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+img {
+  width: 5rem;
+  height: 6rem;
+  object-fit: cover;
+}
+
+
+.quantityBtn {
+  display: flex;
+  align-items: center;
+}
+
+.quantityBtn i {
+  cursor: pointer;
+}
+
+
+.text-danger {
+  cursor: pointer;
+}
+
+.summery {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+
+@media (max-width: 768px) {
+  .p-4 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+
+  .summery {
+    flex-direction: column;
+    align-items: center;
+  }
+} */
+
+
+
+/* Center the loader */
+.loader {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Style the cart items container */
+.p-4 {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* Style the individual cart item */
+.d-flex.border {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the quantity buttons */
+.quantityBtn {
+  display: flex;
+  align-items: center;
+}
+
+/* Style the cart summary container */
+.summery {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Style the "Proceed to checkout" button */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Override Bootstrap styles for spinner */
+.spinner-border {
+  color: #007bff;
+}
+
+/* Additional styling for the cart */
+h1, h2, h5, h6 {
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .p-4 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .d-flex.flex-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .w-100 {
+    width: 100% !important;
+  }
+
+  .w-75 {
+    width: 75% !important;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+}

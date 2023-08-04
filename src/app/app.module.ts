@@ -18,8 +18,11 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
 import { ProductdetailsComponent } from './component/product/productdetails/productdetails.component';
 import { CartComponent } from './component/cart/cart.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { CheckoutComponent } from './component/checkout/checkout.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 // import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
-// import { SearchComponent } from './component/search/search.component';
+import { SearchComponent } from './component/search/search.component';
+import { OrderComponent } from './component/order/order.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,11 @@ import { FooterComponent } from './component/footer/footer.component';
     ProductdetailsComponent,
     CartComponent,
     FooterComponent,
+    CheckoutComponent,
+    PageNotFoundComponent,
     // ForgotPasswordComponent,
-    // SearchComponent,
+    SearchComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

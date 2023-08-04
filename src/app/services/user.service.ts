@@ -28,8 +28,9 @@ export class UserService {
     return this.http.post(this.url + '/signup', data).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-
+        this.loggerService.isLogged = true;
         this.toastr.success('signup seccessfull');
+        this.router.navigate(['/']);
       },
       (err) => {
         this.toastr.error(err.error.message);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 
 
@@ -9,14 +9,16 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit{
   images:string=''
   products: any;
-  constructor(private productData: ProductService) {
-    this.productData.productList().subscribe((data: any) => {
-      this.products = data.products;
-      // console.log(data);
-    });
-  }
+  constructor(private productData: ProductService) {}
  
+ngOnInit() {
+     this.productData.productList().subscribe((data: any) => {
+       this.products = data.products;
+      
+     });
+}
+  
 }

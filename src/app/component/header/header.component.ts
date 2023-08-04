@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { LoggerService } from 'src/app/services/logger.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,10 +11,27 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent {
 
-  constructor(private userService: UserService, private loggerService: LoggerService, private router: Router) { }
-    loggedIn:boolean =false
+  constructor(private userService: UserService, private loggerService: LoggerService, private router: Router ,private cartService:CartService) { }
+  loggedIn: boolean = false
+  count: number = 0;
 
   ngOnInit() {
+
+     this.cartService.getCartData().subscribe((data: any) => {
+       if (data.cart) {
+         this.count=0
+       data.cart.items.forEach((x:any) => {
+
+            return (this.count += x.quantity);
+          
+         })
+        //  console.log(this.count)
+       }
+      
+     });
+
+
+
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {
@@ -35,7 +53,10 @@ export class HeaderComponent {
   logout() {
     this.userService.logout();
     this.router.navigate(['/login'])
-    
-}
+  }
+  
+
+
+
 
 }

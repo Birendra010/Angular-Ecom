@@ -1,7 +1,7 @@
 <div>
   <ngb-carousel *ngIf="popularProducts" class="mt-5">
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
-      <div class="picsum-img-wrapper">
+      <div class="picsum-img-wrapper" style="margin-top: 40px;">
         <img
           class="product-header-img w-100"
           src="{{ item.thumbnail }}"
