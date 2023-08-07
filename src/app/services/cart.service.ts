@@ -15,6 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CartService {
   count: number = 0;
   cartData: [] = [];
+  
 
   url = 'http://192.168.1.64:5000';
 
@@ -57,19 +58,22 @@ export class CartService {
       );
   }
 
-  addToCart(id: string): void {
+  addToCart(headers:any,id: string): void {
     // console.log(this.headers);
     this.http
       .post(
         this.url + '/cart',
         { productId: id },
         {
-          headers: this.headers,
+          headers: headers,
         }
       )
       .subscribe(
         (response: any) => {
           this.cartData = response;
+          // console.log(this.cartData);
+           localStorage.setItem('cart', JSON.stringify(this.cartData));
+          
           this.cartDataSubject.next(this.cartData);
           this.toastr.success(response.message);
         },

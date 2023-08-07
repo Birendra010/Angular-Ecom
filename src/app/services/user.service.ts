@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggerService } from './logger.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,10 +43,10 @@ export class UserService {
     return this.http.post(this.url + '/login', data).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        this.loggerService.isLogged = true
-  
+        this.loggerService.isLogged = true;
+
         this.toastr.success('login seccessfull');
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       },
       (err) => {
         this.toastr.error(err.error.msg);
@@ -55,12 +56,30 @@ export class UserService {
 
   logout() {
     // return this.http.get(this.url + '/logout').subscribe((res) => {
-      localStorage.removeItem('token'  );
-        this.loggerService.isLogged = false;
+    localStorage.removeItem('token');
+    this.loggerService.isLogged = false;
 
-      this.toastr.success('logout seccessfully')
-      this.router.navigate(['/login'])
-  // } );
+    this.toastr.success('logout seccessfully');
+    this.router.navigate(['/login']);
+    // } );
+  }
+
+  forgotPassword(email: any) {
+    return this.http.post(this.url + '/forgotPassword', { email: email });
+  }
+
+  updatePassword(form: any, emailToken: string) {
+    return this.http
+      .put(this.url + '/resetPassword/' + emailToken, form)
+      // .subscribe(
+      //   (res: any) => {
+      //     this.toastr.success(res.msg);
+      //     this.router.navigate(['/login']);
+      //   },
+      //   (err) => {
+      //     this.toastr.error(err.error.msg);
+      //   }
+      // );
   }
 }
 

@@ -1,252 +1,96 @@
-<!-- <div class="container mt-5 border border-dark shadow-lg p-3 bg-secondary rounded position-absolute">
-    <h1 class="text-center text-white mb-2">Shipping Info</h1>
+<div class="d-flex p-3 flex-column flex-md-row align-items-center">
+  <div>
+    <h1 class="ps-5 pt-1">Shipping address</h1>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
-        <div class="mb-3 text-white" class="d-flex">
-            <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" placeholder="name" formControlName="name" />
-            <div *ngIf="name && name.touched" class="text-danger">
-                <span *ngIf="name.errors?.['required'] ">Enter name</span>
-                <span *ngIf="name.errors?.['minlength'] || name.errors?.['name'] ">Enter valid name address</span>
-            </div>
-            
+    <form class="row g-2 p-4" [formGroup]="form">
+      <div class="col-sm-6">
+        <label for="name" class="form-label">name</label>
+        <input type="name" class="form-control" id="name" formControlName="name">
+        <div *ngIf="name && name.touched" class="input-error">
+          <span *ngIf="name.errors?.['required'] ">Enter name</span>
+          <span *ngIf="name?.errors?.['minlength'] ">name length should be min 3 letter</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="phone" class="form-label">phone</label>
+        <input type="phone" class="form-control" maxlength="10" id="phone" formControlName="phone">
+        <div *ngIf="phone && phone.touched" class="input-error">
+          <span *ngIf="phone.errors?.['required'] ">Enter phone number</span>
+          <span *ngIf="phone?.errors?.['minlength'] || phone?.errors?.['pattern'] ">Enter valid phone number</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="house" class="form-label">House</label>
+        <input type="text" class="form-control" id="house" placeholder="house no 123" formControlName="house">
+        <div *ngIf="house && house.touched" class="input-error">
+          <span *ngIf="house.errors?.['required'] ">Enter house number</span>
+          <span *ngIf="house?.errors?.['minlength'] ">Enter valid house number</span>
+        </div>
+      </div>
 
-            
-                <label for="phone" class="form-label">phone</label>
-                <input type="phone" class="form-control" placeholder="phone" formControlName="phone" />
-                <div *ngIf="phone && phone.touched" class="text-danger">
-                    <span *ngIf="phone.errors?.['required'] ">Enter phone</span>
-                    <span
-                        *ngIf="phone.errors?.['minlength'] || phone.errors?.['phone'] || phone.errors?.['maxlength'] ">Enter
-                        valid phone number</span>
-                </div>
-            </div>
+      <div class="col-sm-6">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" formControlName="city">
+        <div *ngIf="city && city.touched" class="input-error">
+          <span *ngIf="city.errors?.['required'] ">Enter city</span>
+          <span *ngIf="city?.errors?.['minlength'] ">Enter valid city</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="state" class="form-label">State</label>
+        <select id="state" class="form-select" formControlName="state">
+          <option value="bihar">Bihar</option>
+          <option value="assam">Assam</option>
+          <option value="chhattisgarh">Chhattisgarh</option>
+          <option value="goa">Goa</option>
+          <option value="gujarat">Gujarat</option>
+          <option value="haryana">Haryana</option>
+          <option value="himachal Pradesh">Himachal Pradesh</option>
+          <option value="jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="delhi">Delhi</option>
+          <option value="kerala">Kerala</option>
 
-            <div class="mb-3 text-white">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="email" formControlName="email" />
-                <div *ngIf="email && email.touched" class="text-danger">
-                    <span *ngIf="email.errors?.['required'] ">Enter email</span>
-                    <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email
-                        address</span>
-                </div>
-            </div>
-
-            <form>
-                <h4>Shipping Address</h4>
-                <div class="mb-3 text-white">
-                    <label for="house" class="form-label">house</label>
-                    <input type="house" class="form-control" placeholder="house" formControlName="house" />
-                    <div *ngIf="house && house.touched" class="text-danger">
-                        <span *ngIf="house.errors?.['required'] ">Enter house</span>
-                        <span *ngIf="house.errors?.['minlength'] || house.errors?.['house'] ">Enter valid house
-                            address</span>
-                    </div>
-                </div>
-                <div class="mb-3 text-white">
-                    <label for="city" class="form-label">city</label>
-                    <input type="city" class="form-control" placeholder="city" formControlName="city" />
-                    <div *ngIf="city && city.touched" class="text-danger">
-                        <span *ngIf="city.errors?.['required'] ">Enter city</span>
-                        <span *ngIf="city.errors?.['minlength'] || city.errors?.['city'] ">Enter valid city
-                            address</span>
-                    </div>
-                </div>
-                <div class="mb-3 text-white">
-                    <label for="state" class="form-label">state</label>
-                    <input type="state" class="form-control" placeholder="state" formControlName="state" />
-                    <div *ngIf="state && state.touched" class="text-danger">
-                        <span *ngIf="state.errors?.['required'] ">Enter state</span>
-                        <span *ngIf="state.errors?.['minlength'] || state.errors?.['state'] ">Enter valid state
-                            address</span>
-                    </div>
-                </div>
-
-                <div class="mb-3 text-white">
-                    <label for="pincode" class="form-label">pincode</label>
-                    <input type="pincode" class="form-control" placeholder="pincode" formControlName="pincode" />
-                    <div *ngIf="pincode && pincode.touched" class="text-danger">
-                        <span *ngIf="pincode.errors?.['required'] ">Enter pincode</span>
-                        <span
-                            *ngIf="pincode.errors?.['minlength'] || pincode.errors?.['pincode'] || pincode.errors?.['maxlength'] ">Enter
-                            valid pincode number</span>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-                        Save Details
-                    </button>
-                </div>
-            </form>
-
-            <div style="
-          min-width: 16rem;
-          max-width: 25rem;
-          height: max-content;
-          padding: 3px;
-          border: 1px solid rgb(206, 208, 209);
-          text-align: center;
-          margin-top: 45px;
-        ">
-                <h2>Cart Summery</h2>
-                <div class="summery">
-                    <span>Subtotal</span>
-                    <span>{{cartDetails.totalPrice}}</span>
-                </div>
-                <div class="summery">
-                    <span>Total Items</span>
-                    <span>{{cartDetails.totalItems}}</span>
-                </div>
-                <div class="summery">
-                    <span>Shipping charges</span>
-                    <span>0</span>
-                </div>
-                <hr />
-                <div class="summery">
-                    <span>Total</span>
-                    <span>{{cartDetails.totalPrice}}</span>
-                </div>
-                <button class="btn btn-primary w-75 m-auto mt-3 mb-2" routerLink="/checkout">
-                    Procced to checkout
-                </button>
-            </div>
-        
+          Assam
+        </select>
+        <div *ngIf="state && state.touched" class="input-error">
+          <span *ngIf="state.errors?.['required'] ">Enter state</span>
+          <span *ngIf="state?.errors?.['minlength'] ">Enter valid state</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="pincode" class="form-label">Pincode</label>
+        <input type="text" class="form-control" id="pincode" maxlength="6" formControlName="pincode">
+        <div *ngIf="pincode && pincode.touched" class="input-error">
+          <span *ngIf="pincode.errors?.['required'] ">Enter pincode</span>
+          <span *ngIf="pincode?.errors?.['minlength'] ">Enter valid pincode </span>
+        </div>
+      </div>
     </form>
-</div> -->
 
-<div class="main-content px-4 d-flex flex-row mt-5 mb-5">
-  <div class="section-content section-content-p30">
-    <div class="container-fluid">
-      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-        <div formGroupName="customer" class="form-area">
-          <h3>Customer</h3>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="firstName"> Name</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="firstName" type="text" formControlName="Name" />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="phone">Mobile</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="phone" type="text" formControlName="phone" />
-              </div>
-            </div>
-          </div>
-          <!-- <div class="row">
-            <div class="col-md-3">
-              <label for="email">Email</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="email" type="email" formControlName="email" />
-              </div>
-            </div>
-          </div> -->
-        </div>
-
-        <div formGroupName="shippingAddress" class="form-area">
-          <h3>Shipping Address</h3>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="house">House</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="house" type="text" formControlName="house" />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="shppingCity">City</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="shppingCity" type="text" formControlName="city" />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="pincode">pincode</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <input id="pincode" type="email" formControlName="pincode" />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <label for="shippingState">state</label>
-            </div>
-            <div class="col-md-9">
-              <div class="input-space">
-                <select id="shippingCountry" formControlName="state">
-                  <option value="assam">Assam</option>
-                  <option value="bihar">Bihar</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                  <option value="france">France</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style="
-            min-width: 16rem;
-            max-width: 25rem;
-            height: max-content;
-            padding: 3px;
-            border: 1px solid rgb(206, 208, 209);
-            text-align: center;
-            margin-top: 40px;
-          "
-        >
-          <h2>Cart Summery</h2>
-          <div class="summery">
-            <span>Subtotal</span>
-            <!-- <span>{{cartDetails.totalPrice}}</span> -->
-          </div>
-          <div class="summery">
-            <span>Total Items</span>
-            <!-- <span>{{cartDetails.totalItems}}</span> -->
-          </div>
-          <div class="summery">
-            <span>Shipping charges</span>
-            <span>0</span>
-          </div>
-          <hr />
-          <div class="summery">
-            <span>Total</span>
-            <!-- <span>{{cartDetails.totalPrice}}</span> -->
-          </div>
-          <button
-            class="btn btn-primary w-75 m-auto mt-3 mb-2"
-            routerLink="/checkout"
-          >
-            Procced to
-          </button>
-        </div>
-      </form>
+  </div>
+  <div
+    style="min-width: 20rem; max-width: 28rem; padding: 5px; margin: 5px;  border: 1px solid rgb(206, 208, 209); text-align: center;">
+    <h2>Cart Summery</h2>
+    <div class="summery">
+      <span>Subtotal</span>
+      <span>{{cartDetails.totalPrice}}</span>
     </div>
+    <div class="summery">
+      <span>Total Items</span>
+      <span>{{cartDetails.totalItems}}</span>
+    </div>
+    <div class="summery">
+      <span>Shipping charges</span>
+      <span>0</span>
+    </div>
+    <hr>
+    <div class="summery">
+      <span>Total : </span>
+      <span> {{cartDetails.totalPrice}}$</span>
+    </div>
+    <button class=" order  btn btn-primary w-50" [disabled]="form.status === 'INVALID'" (click)="placeOrder()">
+      placeOrder
+    </button>
   </div>
 </div>

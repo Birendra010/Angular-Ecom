@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light" style="height: 50px">
+<nav class="navbar navbar-expand navbar-light " style="height: 50px">
   <div class="container-fluid">
     <div class="collapse navbar-collapse d-flex flex-md-row" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
@@ -25,30 +25,31 @@
       <div>
         <i class="bi bi-person-circle dropdown  ">
           <div class="dropdown-content">
-            <button class="nav-link active" style="color: rgb(124, 124, 236); font-size: 20px" *ngIf="!loggedIn"
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn"
               routerLink="/login">
               Login
             </button>
 
-            <button class="nav-link active" style="color: rgb(124, 124, 236); font-size: 20px" *ngIf="!loggedIn"
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn"
               routerLink="/signup">
               Signup
             </button>
 
-            <button class="nav-link active" style=" font-size: 20px" *ngIf="loggedIn" (click)="logout()" >
+            <button class="nav-link active" style=" font-size: 17px; " *ngIf="loggedIn" (click)="logout()">
               Logout
             </button>
 
-            <button class="nav-link active" style=" font-size: 20px" *ngIf="loggedIn"
-              routerLink="">
-              My Order
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="loggedIn" routerLink="/order">
+              Orders
             </button>
           </div>
         </i>
       </div>
-      <div>
-        <i class="bi bi-cart-plus mt-5" title="Cart" style="cursor: pointer   "  routerLink="/cart" >
-        {{count}}
+      <div >
+        <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 15px; right: -20px">
+          {{count}} </span>
+        <i class="bi bi-cart " title="Cart" style="cursor: pointer   " routerLink="/cart">
+
         </i>
       </div>
     </div>

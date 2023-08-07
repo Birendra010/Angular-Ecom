@@ -36,7 +36,7 @@ export class CartComponent {
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.cartItems = data.cart.items;
-        console.log(data.cart);
+        // console.log(data.cart);
         
         this.cartDetails = data.cart;
         this.loading = false;
@@ -61,3 +61,5 @@ export class CartComponent {
     });
   }
 }
+
+

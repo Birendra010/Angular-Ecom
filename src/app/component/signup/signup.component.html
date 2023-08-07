@@ -1,14 +1,15 @@
 
 
 <div
-  class="container mt-3 border border-dark shadow-lg p-3 bg-secondary rounded"
+  class="container mt-5   shadow-lg p-3  rounded " style="background-color: #f5e6e6;"
 >
-  <h1 class="text-center text-white mb-2">Signup</h1>
+  <h1 class="text-center  mb-2">Signup</h1>
 
   <form [formGroup]="form " (ngSubmit)="onSubmit()">
-    <div class="mb-3 text-white">
+    <div class="mb-3 ">
       <label for="name" class="form-label">Name</label>
       <input
+      style="border: 0.5px solid rgb(224, 218, 218) " 
         type="text"
         class="form-control"
         placeholder="name"
@@ -20,9 +21,10 @@
       </div>
     </div>
 
-    <div class="mb-3 text-white">
+    <div class="mb-3 ">
       <label for="email" class="form-label">Email</label>
-      <input
+      <input 
+      style="border: 0.5px solid rgb(224, 218, 218) " 
         type="email"
         class="form-control"
         placeholder="email"
@@ -35,9 +37,10 @@
         >
       </div>
     </div>
-    <div class="mb-3 text-white">
+    <div class="mb-3 ">
       <label for="mobile" class="form-label">Mobile</label>
       <input
+      style="border: 0.5px solid rgb(224, 218, 218) " 
         type="mobile"
         class="form-control"
         placeholder="mobile"
@@ -51,9 +54,10 @@
       </div>
     </div>
 
-    <div class="mb-3 text-white">
+    <div class="mb-3 ">
       <label for="password" class="form-label">Password</label>
       <input
+      style="border: 0.5px solid rgb(224, 218, 218) " 
         type="password"
         class="form-control"
         placeholder="Password"

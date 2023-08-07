@@ -1,14 +1,14 @@
 .margin-left {
-  margin-left: 30px !important;
+  margin-left: 40px !important;
 }
 
-.navbar {
-  background-color: #3dc1c8;
-}
+ .navbar {
+  background-color: #f3f3f3;
+} 
 
 .bi {
   font-size: x-large;
-  padding-left: 10px;
+  padding-left: 20px;
 }
 
 .dropdown {
@@ -20,8 +20,8 @@
   display: none;
   position: absolute;
   background-color: #f1e8e8;
-  height: 5rem;
-  width: 8rem;
+  height: 4rem;
+  width: 6rem;
 
   left: -20px;
 

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,14 +16,23 @@ export class ProductdetailsComponent implements OnInit {
   product!:  Product;
   image: string = '';
   loading: boolean = false;
+  headers:any
   constructor(
     private router: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
     private toastr: ToastrService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
+
+this.headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'x-api-key': localStorage.getItem('token') || '',
+});
+
     let paramId = this.router.snapshot.paramMap.get('id');
     if (paramId) {
       this.productService.getProductById(paramId).subscribe((res: any) => {
@@ -34,13 +44,13 @@ export class ProductdetailsComponent implements OnInit {
     this.image = url;
   }
 
-  addToCart(id: string) {
+  addToCart(id:string) {
     this.loading = true;
-    this.cartService.addToCart(id);
+    this.cartService.addToCart(this.headers ,id);
     this.cartService.getCartData();
     //  this.toastr.success("item added");
     setTimeout(() => {
       this.loading = false;
-    }, 1500);
+    }, 1000);
   }
 }

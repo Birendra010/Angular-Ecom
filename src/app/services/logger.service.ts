@@ -10,7 +10,7 @@ export class LoggerService {
   
   
   isLoggedIn() {
-    console.log(this.isLogged);
+    // console.log(this.isLogged);
     
     return this.isLogged
   }

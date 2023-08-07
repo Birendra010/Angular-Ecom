@@ -1,0 +1,16 @@
+.summery{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: start;
+}
+.summery span{
+    width: 8rem;
+}
+.summery span:nth-child(2){
+    width: 5rem;
+    text-align: end;
+}
+.col-sm-6{
+    height: 5.3rem;
+}

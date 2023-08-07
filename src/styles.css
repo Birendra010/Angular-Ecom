@@ -12,3 +12,7 @@ body{
     border-radius: 5px;
 
 }
+
+html ,body {
+    background-color: rgb(217, 217, 217);
+}

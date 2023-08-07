@@ -10,6 +10,9 @@ import { CartComponent } from './component/cart/cart.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { OrderComponent } from './component/order/order.component';
+import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
+import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
@@ -20,6 +23,10 @@ const routes: Routes = [
   { component: ContactUsComponent, path: 'contact' },
   { component: CartComponent, path: 'cart', canActivate: [AuthGuard] },
   { component: CheckoutComponent, path: 'checkout', canActivate: [AuthGuard] },
+  { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
+  { component: ResetPasswordComponent, path: 'forgotPassword' },
+  { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
+
   // { path: 'search/:keyword', component: ProductComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

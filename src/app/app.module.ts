@@ -23,6 +23,9 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 // import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { SearchComponent } from './component/search/search.component';
 import { OrderComponent } from './component/order/order.component';
+import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
+import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
+import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { OrderComponent } from './component/order/order.component';
     // ForgotPasswordComponent,
     SearchComponent,
     OrderComponent,
+    ResetPasswordComponent,
+    UpdatePasswordComponent,
+    OrderdetailsComponent,
   ],
   imports: [
     BrowserModule,
