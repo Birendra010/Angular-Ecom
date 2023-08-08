@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { OrderComponent } from './component/order/order.component';
 import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
+import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { component: CartComponent, path: 'cart', canActivate: [AuthGuard] },
   { component: CheckoutComponent, path: 'checkout', canActivate: [AuthGuard] },
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
+  { component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard] },
   { component: ResetPasswordComponent, path: 'forgotPassword' },
   { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
 

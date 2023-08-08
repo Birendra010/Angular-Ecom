@@ -8,33 +8,35 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent {
+  loading: boolean = false;
   constructor(
     private orderService: OrderService,
     private toastr: ToastrService
   ) {}
-
   orders: any;
-  getTime() {
-    
+  getTime(input: string) {
+    return new Date(input).toLocaleDateString();
   }
 
   ngOnInit() {
-    this.orderService.getUserOrder();
-    this.orderService.getOrderData().subscribe((data: any) => {
+    this.loading = true;
+    this.orderService.getUserOrder().subscribe((data: any) => {
       if (data.data) {
         this.orders = data.data;
-                // console.log(this.orders);
       }
     });
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 
   orderCancel(id: string) {
-    this.orderService.cancelOrder(id);
-    this.orderService.getOrderData().subscribe((data: any) => {
+    this.loading = true;
+    this.orderService.cancelOrder(id).subscribe((data: any) => {
       if (data) {
         this.orders = this.orders.filter((x: any) => x._id != id);
-        
-        this.toastr.success(data.msg);
+        this.loading = false;
+        this.toastr.success(data.message);
       }
     });
   }

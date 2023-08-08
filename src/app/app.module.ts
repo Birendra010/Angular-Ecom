@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { LoginComponent } from './component/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './component/header/header.component';
 import { ProductComponent } from './component/product/product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +26,7 @@ import { OrderComponent } from './component/order/order.component';
 import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
+import { TokenInterceptorService } from './TokenInterceptorService';
 
 @NgModule({
   declarations: [
@@ -56,11 +57,18 @@ import { OrderdetailsComponent } from './component/order/orderdetails/orderdetai
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-right',
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -88,10 +88,10 @@ export class CheckoutComponent {
 
   placeOrder() {
     this.addClass();
-    this.orderService.placeOrder(this.form.value);
-    this.orderService.getOrderData().subscribe((data: any) => {
+    this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
       if (data) {
         localStorage.removeItem('cart');
+        this.router.navigate(['/order'])
       }
     });
   }

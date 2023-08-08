@@ -1,9 +1,4 @@
-
-
-
-
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from './logger.service';
@@ -15,7 +10,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CartService {
   count: number = 0;
   cartData: [] = [];
-  
 
   url = 'http://192.168.1.64:5000';
 
@@ -29,94 +23,52 @@ export class CartService {
     []
   );
 
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'x-api-key': localStorage.getItem('token') || '',
-  });
-
   getCartData(): Observable<any> {
     return this.cartDataSubject.asObservable();
   }
 
-  getUserCart(headers: any): void {
-    this.http
-      .get(this.url + '/cart', {
-        headers: headers,
-      })
-      .subscribe(
-        (response: any) => {
-          this.cartData = response;
-          this.cartDataSubject.next(this.cartData);
-        },
-        (error) => {
-          this.toastr.error(error.error.message || error.error.error);
-          if (error.status === 500 || error.status === 401) {
-            localStorage.removeItem('token');
-            this.loggerService.isLogged = false;
-          }
+  getUserCart(): void {
+    this.http.get(this.url + '/cart', {}).subscribe(
+      (response: any) => {
+        this.cartData = response;
+        this.cartDataSubject.next(this.cartData);
+      },
+      (error) => {
+        this.toastr.error(error.error.message || error.error.error);
+        if (error.status === 500 || error.status === 401) {
+          // localStorage.clear()
+          localStorage.removeItem('token');
+          this.loggerService.isLogged = false;
         }
-      );
+      }
+    );
   }
 
-  addToCart(headers:any,id: string): void {
-    // console.log(this.headers);
-    this.http
-      .post(
-        this.url + '/cart',
-        { productId: id },
-        {
-          headers: headers,
-        }
-      )
-      .subscribe(
-        (response: any) => {
-          this.cartData = response;
-          // console.log(this.cartData);
-           localStorage.setItem('cart', JSON.stringify(this.cartData));
-          
-          this.cartDataSubject.next(this.cartData);
-          this.toastr.success(response.message);
-        },
-        (error) => {
-          this.toastr.error(error.error.message);
-        }
-      );
+  addToCart(id: string): void {
+    this.http.post(this.url + '/cart', { productId: id }).subscribe(
+      (response: any) => {
+        this.cartData = response;
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
+
+        this.cartDataSubject.next(this.cartData);
+        this.toastr.success(response.message);
+      },
+      (error) => {
+        this.toastr.warning('please login');
+      }
+    );
   }
 
-  cartUpdate(productId: string, quantity: number, headers: any): void {
-    this.http
-      .put(this.url + '/cart', { productId, quantity }, { headers: headers })
-      .subscribe(
-        (response: any) => {
-          this.cartData = response;
-          this.cartDataSubject.next(this.cartData);
-          this.toastr.success(response.message);
-        },
-        (error) => {
-          this.toastr.error(error.error.message);
-        }
-      );
+  cartUpdate(productId: string, quantity: number): void {
+    this.http.put(this.url + '/cart', { productId, quantity }).subscribe(
+      (response: any) => {
+        this.cartData = response;
+        this.cartDataSubject.next(this.cartData);
+        this.toastr.success(response.message);
+      },
+      (error) => {
+        this.toastr.error(error.error.message);
+      }
+    );
   }
-
-
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

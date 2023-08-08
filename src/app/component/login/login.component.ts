@@ -34,6 +34,7 @@ export class LoginComponent {
 
   login() {
     this.userService.login(this.form.value)
+    
     // this.router.navigate(['/cart'])
 }
 

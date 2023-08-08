@@ -1,1 +1,61 @@
-<p>orderdetails works!</p>
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+    <div class="spinner-border mx-auto" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
+<!-- {{orderDetail | json}} -->
+
+<div *ngIf="orderDetail && orderDetail.status !== 'canceled'"
+    class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
+    <!-- {{orderDetail | json}} -->
+    <div *ngIf="orderDetail" class="box">
+        <div *ngFor="let item of orderDetail.items">
+            <div class="card m-2">
+                <!-- {{item | json}} -->
+                <div class="card-body" class="p-2 d-flex flex-row gap-2">
+                    <img src="{{item.productId.thumbnail}}" alt="" style="height:5rem; width: 5rem;">
+                    <div class="d-flex flex-column w-50">
+                        <h5 class="card-title">{{item.productId.brand}}</h5>
+                        <span class="card-text">{{item.productId.description}}</span>
+                        <!-- <span class="card-text">{{item.productId.description}}</span> -->
+
+                    </div>
+                    <div class="ms-auto d-flex flex-column justify-content-between">
+                        <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} </span>
+                        <button class="btn btn-danger btn-sm" (click)="cancelItem(item._id)">Cancel
+                            Item</button>
+                            <!-- {{item._id | json}} -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <button class="cancel btn btn-primary" *ngIf="orderDetail && orderDetail.totalItems >= 1 "
+            (click)="orderCancel(orderDetail.items_id)">Cancel Order</button>
+    </div>
+    <div class="summery" *ngIf="orderDetail.items && orderDetail.totalItems >= 1 ">
+        <h2 class="text-center">Order Summery</h2>
+        <div>
+            <div><span>TotalItems</span><span style="margin-left: 6rem;">  {{orderDetail.totalItems}}</span></div>
+            <div><span>TotalPrice</span><span style="margin-left: 6rem;">{{orderDetail.totalPrice}}<i class="bi bi-currency-dollar"></i></span></div>
+        </div>
+        <div id="address-details cart" >
+            <h5 style="margin-left: 2rem;">Delivered to :</h5>
+            <div>
+                <div><span>Name:</span><span style="margin-left: 1rem;">{{orderDetail.shippingInfo.name}}</span><br></div>
+                <div><span>Phone:</span><span style="margin-left: 1rem;">{{orderDetail.shippingInfo.phone}}</span><br></div>
+
+                <div><span>House:</span><span style="margin-left: 1rem;">{{orderDetail.shippingInfo.address.house}}</span><br></div>
+                
+                <div><span>City:</span><span style="margin-left: 2rem;">{{orderDetail.shippingInfo.address.city}}</span><br></div>
+                <div><span>State:</span><span style="margin-left: 1.5rem;">{{orderDetail.shippingInfo.address.state}}</span><br></div>
+
+                <div><span>Pincode:</span><span style="margin-left: .5rem;">{{orderDetail.shippingInfo.address.pincode}}</span><br></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- shippingInfo -->

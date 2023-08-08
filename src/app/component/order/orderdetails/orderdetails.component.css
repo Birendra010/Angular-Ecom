@@ -1,0 +1,4 @@
+.summery{
+    min-width:16rem;  max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 45px;
+    text-align: start;
+}
