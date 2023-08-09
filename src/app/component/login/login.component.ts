@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // loginForm!: FormGroup;
   constructor(private userService:UserService ,private router:Router) {}
 
   form = new FormGroup({
@@ -35,18 +34,8 @@ export class LoginComponent {
   login() {
     this.userService.login(this.form.value)
     
-    // this.router.navigate(['/cart'])
 }
-
-  
-  
-  
-  
-//   logout() {
-//   this.userService.logout
-// }
-
-  
+ 
 }
 
 

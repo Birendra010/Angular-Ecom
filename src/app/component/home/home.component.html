@@ -1,5 +1,5 @@
 <div>
-  <ngb-carousel *ngIf="popularProducts" class="mt-5">
+  <ngb-carousel *ngIf="popularProducts" class="m3-5">
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
       <div class="picsum-img-wrapper" style="margin-top: 40px;">
         <img
@@ -8,7 +8,9 @@
           alt="Random first slide"
         />
       </div>
-      <div class="carousel-caption">
+
+      
+      <div class="carousel-caption" >
         <h3>{{ item.brand }}</h3>
         <p>{{ item.description }}</p>
       </div>
@@ -20,7 +22,6 @@
       <div class="col p-2" *ngFor="let p of HomeProducts">
         <div class="card mx-auto shadow-lg p-3 bg-white rounded" (click)="productPage(p._id)">
           <img class="card-img-top" src="{{ p.thumbnail }}" />
-          <!-- <span>{{p.title }}</span> -->
           <span>{{ p.brand }}</span>
           <span class="text-truncate">{{ p.description }}</span>
 
@@ -28,7 +29,6 @@
             <span>${{ p.price }}</span>
             <span class="bi bi-star">{{ p.rating }}</span>
           </div>
-          <!-- <span>{{p.category }}</span> -->
         </div>
       </div>
     </div>

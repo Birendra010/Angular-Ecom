@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -8,10 +7,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
-  constructor(
-    private cartService: CartService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private cartService: CartService) {}
 
   cartDetails: any;
   cartItems: any[] = [];
@@ -20,27 +16,24 @@ export class CartComponent {
 
   ngOnInit(): void {
     this.loading = true;
-    // this.loader();
 
     this.cartService.getUserCart();
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.cartItems = data.cart.items;
-        // console.log(data.cart);
 
         this.cartDetails = data.cart;
         this.loading = false;
-        localStorage.setItem('cart', JSON.stringify(this.cartDetails));
+        // localStorage.setItem('cart', JSON.stringify(this.cartDetails));
       }
     });
+
     setTimeout(() => {
       this.loading = false;
     }, 2000);
-
   }
 
   cartUpdate(productId: string, quantity: number) {
-    // this.loader();
     this.loading = true;
     this.cartService.cartUpdate(productId, quantity);
     this.cartService.getCartData().subscribe((data: any) => {

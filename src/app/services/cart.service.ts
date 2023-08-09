@@ -31,12 +31,13 @@ export class CartService {
     this.http.get(this.url + '/cart', {}).subscribe(
       (response: any) => {
         this.cartData = response;
+        
         this.cartDataSubject.next(this.cartData);
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
       },
       (error) => {
         this.toastr.error(error.error.message || error.error.error);
         if (error.status === 500 || error.status === 401) {
-          // localStorage.clear()
           localStorage.removeItem('token');
           this.loggerService.isLogged = false;
         }
@@ -44,13 +45,14 @@ export class CartService {
     );
   }
 
+
   addToCart(id: string): void {
     this.http.post(this.url + '/cart', { productId: id }).subscribe(
       (response: any) => {
         this.cartData = response;
-        localStorage.setItem('cart', JSON.stringify(this.cartData));
-
+        
         this.cartDataSubject.next(this.cartData);
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success(response.message);
       },
       (error) => {
@@ -65,6 +67,8 @@ export class CartService {
         this.cartData = response;
         this.cartDataSubject.next(this.cartData);
         this.toastr.success(response.message);
+        // localStorage.setItem('cart', JSON.stringify(this.cartData));
+
       },
       (error) => {
         this.toastr.error(error.error.message);

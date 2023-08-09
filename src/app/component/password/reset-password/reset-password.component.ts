@@ -14,7 +14,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./reset-password.component.css'],
 })
 export class ResetPasswordComponent {
-  // form: FormGroup;
 
   constructor(
     fb: FormBuilder,

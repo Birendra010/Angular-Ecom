@@ -5,7 +5,6 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggerService } from './logger.service';
 import { CartService } from './cart.service';
-// import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +21,7 @@ export class UserService {
   ) {}
   url = 'http://192.168.1.64:5000';
 
-  // message: string = '';
-  // isLoggedin:boolean =false
+
 
   signup(data: any) {
     return this.http.post(this.url + '/signup', data).subscribe(
@@ -57,7 +55,7 @@ export class UserService {
   logout() {
     localStorage.clear();
     this.loggerService.isLogged = false;
-    this.toastr.success('logout seccessfully');
+    // this.toastr.success('logout seccessfully');
     this.router.navigate(['/login']);
   }
 

@@ -25,8 +25,10 @@
         </div>
 
 
-       <div>
+       <div class="d-flex flex-row justify-content-between">
     <a style="color: blue;" routerLink="/forgotPassword">ForgotPassword?</a>
+    <a style="color: blue;" routerLink="/signup">create New Account?</a>
+
 
        </div>
    
@@ -35,7 +37,6 @@
         <div class="  d-flex  gap-2">
             <button type="submit" class="btn btn-primary " [disabled]="form.invalid" style="margin-left: 10rem; width: 5rem;">Login</button>
        
-            <!-- <button type="submit" class="btn btn-primary" routerLink="/signup">Back to Signup</button> -->
         </div>
     </form>
 </div>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -12,9 +11,7 @@ export class OrderdetailsComponent {
   constructor(
     private router: ActivatedRoute
     ,
-    private route: Router,
     private orderService: OrderService,
-    private toastr: ToastrService
   ) {}
   loading: boolean = false;
   orderDetail: any;
@@ -26,9 +23,7 @@ export class OrderdetailsComponent {
     if (this.orderId) {
       this.orderService.getOrderDetails(this.orderId).subscribe((data: any) => {
         if (data) {
-          // console.log(data)
           this.orderDetail = data.order;
-          console.log(this.orderDetail.status);
           
           this.loading = false;
         }
@@ -42,10 +37,8 @@ export class OrderdetailsComponent {
     this.orderService.cancelProductInOrder(this.orderId, id)
       .subscribe((data: any) => {
         if (data) {
-          // console.log(data);
           
           this.orderDetail = data.order;
-          // console.log(this.orderDetail);
           
           this.loading = false;
         }

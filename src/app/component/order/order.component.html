@@ -4,16 +4,16 @@
     </div>
 </div>
 
-<!-- <div *ngIf=" !orders || orders.items.length === 0">
+<div *ngIf=" !orders || orders && orders.length === 0">
     <h1 class="text-center mt-5"> No Order found </h1>
-</div> -->
+</div>
 
-<h1 *ngIf="orders.length > 0 " class="text-center">My orders</h1>
+<h1 *ngIf="orders && orders.length > 0 " class="text-center">My orders</h1>
 <div class="d-flex flex-column gap-2 p-3" style="width:60rem ; margin-left: 10rem; ">
     <div *ngIf="orders">
         <div class="card  px-3 mt-2 " *ngFor="let orders of orders">
-            <!-- {{orders | json}} -->
-            <div class="card-body " class ="p-2 d-flex flex-row gap-2">
+
+            <div class="card-body " class="p-2 d-flex flex-row gap-2">
                 <div class="d-flex flex-row gap-2 w-40">
                     <img src="{{orders.items[0].productId.thumbnail}}" alt="" style="height: 5rem; width: 5rem;">
                     <div class="d-flex flex-column w-40 ">
@@ -24,26 +24,19 @@
 
                     </div>
                 </div>
-                <div
-                class="ms-auto d-flex flex-column justify-content-between "   
-                
-                >
-                    <!-- <div class="d-flex flex-column ">
-                        <span>Order on:</span>
-                        <span>{{getTime(orders.createdAt)}}</span>
-                    </div>  -->
-                    <span class="badge "  style="width: 6rem; height: 2rem; margin-top: 2px; font-size: medium; padding-top: 5px; cursor: pointer;" 
-                  
+                <div class="ms-auto d-flex flex-column justify-content-between ">
+
+                    <span class="badge "
+                        style="width: 6rem; height: 2rem; margin-top: 2px; font-size: medium; padding-top: 5px; cursor: pointer;"
                         [class.bg-warning]="orders.status ==='pending'"
                         [class.bg-success]="orders.status ==='delivered'">
                         {{orders.status}}
                     </span>
-                    <!-- <button class="mt-2 btn btn-sm btn-primary" *ngIf="orders.status==='pending'" title="View Details"
-                        [routerLink]="['/order',orders._id]">View Details</button> -->
 
 
-                        <button class="mt-2 btn btn-sm btn-primary" *ngIf="orders.status==='pending'" title="View Details"
-                            [routerLink]="['/order',orders._id]">View Details</button>
+
+                    <button class="mt-2 btn btn-sm btn-primary" *ngIf="orders.status==='pending'" title="View Details"
+                        [routerLink]="['/order',orders._id]">View Details</button>
                 </div>
             </div>
         </div>

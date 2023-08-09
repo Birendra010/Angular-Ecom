@@ -9,6 +9,7 @@
 .bi {
   font-size: x-large;
   padding-left: 20px;
+  margin-top: 0;
 }
 
 .dropdown {
@@ -24,6 +25,7 @@
   width: 6rem;
 
   left: -20px;
+  top:2rem;
 
   border-style: solid;
   border-width: 0.5px;
@@ -33,4 +35,11 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+@media (max-width: 768px) {
+  ul li{
+    font-size: 12px;
+  }
+
 }

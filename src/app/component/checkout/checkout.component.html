@@ -74,11 +74,12 @@
     <h2>Cart Summery</h2>
     <div class="summery">
       <span>Subtotal</span>
-      <span>{{cartDetails.totalPrice}}</span>
+      <!-- {{cartDetails.cart.totalItems}} -->
+      <span>{{cartDetails.cart.totalPrice}}$</span>
     </div>
     <div class="summery">
       <span>Total Items</span>
-      <span>{{cartDetails.totalItems}}</span>
+      <span>{{cartDetails.cart.totalItems}}</span>
     </div>
     <div class="summery">
       <span>Shipping charges</span>
@@ -87,7 +88,7 @@
     <hr>
     <div class="summery">
       <span>Total : </span>
-      <span> {{cartDetails.totalPrice}}$</span>
+      <span> {{cartDetails.cart.totalPrice}}$</span>
     </div>
     <button class=" order  btn btn-primary w-50" [disabled]="form.status === 'INVALID'" (click)="placeOrder()">
       placeOrder

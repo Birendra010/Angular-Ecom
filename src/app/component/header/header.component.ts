@@ -20,20 +20,31 @@ export class HeaderComponent {
   count: number = 0;
 
   ngOnInit() {
+
+        let cart = localStorage.getItem('cart');
+        if (cart) {
+          this.count=0
+         JSON.parse(cart).cart.items.forEach((x: any) => {
+            return (this.count += x.quantity);
+          });
+        }
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.count = 0;
         data.cart.items.forEach((x: any) => {
-          return (this.count += x.quantity);
+        return (this.count += x.quantity);
         });
-        //  console.log(this.count)
       }
     });
-    this.cartService.getCartData().subscribe((data: any) => {
-      if (data.cart) {
-        this.count = data.cart.totalItems;
-      }
-    });
+    // this.cartService.getCartData().subscribe((data: any) => {
+    //   if (data.cart) {
+    //     this.count=0
+    //      data.cart.items.forEach((x: any) => {
+    //        return (this.count += x.quantity);
+           
+    //     });
+    //   }
+    // });
 
     this.router.events.subscribe((val: any) => {
       if (val.url) {
@@ -50,8 +61,12 @@ export class HeaderComponent {
   isLoggedin = this.loggerService.isLogged;
 
   logout() {
-    this.count=0
+    this.count = 0;
     this.userService.logout();
-
   }
+
+
+
+
+  
 }

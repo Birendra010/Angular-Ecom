@@ -1,17 +1,17 @@
-<div class="container-fluid mt-5 ">
+<div class="container-fluid mt-2;" style="margin-left: 5rem; margin-top: 3rem;">
   <div *ngIf="product" class="d-flex flex-column flex-md-row gap-5">
     <div>
-      <div style="height: 350px">
+      <div style="height: 350px; width: 400px; ">
         <img
           src="{{ image || product.thumbnail }}"
           alt=""
-          style="height: 100%"
+          style="height: 100% ; display: flex; "
           class="img-fluid"
         />
       </div>
       <div
-        class="d-flex flex-row mt-4"
-        style="width: 50%; height: 8rem; overflow-x: scroll"
+        class="d-flex flex-row mt-2 "
+        style="width: 350px;; height: 8rem; overflow-x: scroll; cursor: pointer; "
       >
         <img
           src="{{ url }}"
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column" style="max-width: 40rem">
+    <div class="d-flex flex-column" style="width: 500px; margin-right: 8rem;  height: 350px;">
       <h2>Brand:{{ product.brand }}</h2>
       <p>{{ product.description }}</p>
       <p>{{ product.category }}</p>
