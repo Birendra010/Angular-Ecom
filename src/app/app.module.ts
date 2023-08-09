@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,8 +19,6 @@ import { CartComponent } from './component/cart/cart.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
-// import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
-import { SearchComponent } from './component/search/search.component';
 import { OrderComponent } from './component/order/order.component';
 import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
@@ -42,8 +39,6 @@ import { TokenInterceptorService } from './TokenInterceptorService';
     FooterComponent,
     CheckoutComponent,
     PageNotFoundComponent,
-    // ForgotPasswordComponent,
-    SearchComponent,
     OrderComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent,
