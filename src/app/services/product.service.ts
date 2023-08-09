@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../component/environment/environment';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  url = 'http://192.168.1.64:5000';
+  url: string = environment.API_URL;
 
   constructor(private http: HttpClient) {}
   productList() {

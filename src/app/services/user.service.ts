@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggerService } from './logger.service';
 import { CartService } from './cart.service';
+import { environment } from '../component/environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +18,9 @@ export class UserService {
     private toastr: ToastrService,
     private router: Router,
     private loggerService: LoggerService,
-    private cartService : CartService
+    private cartService: CartService
   ) {}
-  url = 'http://192.168.1.64:5000';
-
-
+  url: string = environment.API_URL;
 
   signup(data: any) {
     return this.http.post(this.url + '/signup', data).subscribe(
@@ -41,8 +40,8 @@ export class UserService {
     return this.http.post(this.url + '/login', data).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        this.loggerService.isLogged = true;  
-        this.cartService.getUserCart()
+        this.loggerService.isLogged = true;
+        this.cartService.getUserCart();
         this.router.navigate(['/']);
         this.toastr.success('login seccessfull');
       },
@@ -65,6 +64,5 @@ export class UserService {
 
   updatePassword(form: any, emailToken: string) {
     return this.http.put(this.url + '/resetPassword/' + emailToken, form);
-  
   }
 }

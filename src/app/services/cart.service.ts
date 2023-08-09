@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from './logger.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../component/environment/environment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,8 @@ export class CartService {
   count: number = 0;
   cartData: [] = [];
 
-  url = 'http://192.168.1.64:5000';
+  url:string= environment.API_URL;
+ 
 
   constructor(
     private http: HttpClient,
@@ -31,7 +34,7 @@ export class CartService {
     this.http.get(this.url + '/cart', {}).subscribe(
       (response: any) => {
         this.cartData = response;
-        
+
         this.cartDataSubject.next(this.cartData);
         localStorage.setItem('cart', JSON.stringify(this.cartData));
       },
@@ -45,12 +48,11 @@ export class CartService {
     );
   }
 
-
   addToCart(id: string): void {
     this.http.post(this.url + '/cart', { productId: id }).subscribe(
       (response: any) => {
         this.cartData = response;
-        
+
         this.cartDataSubject.next(this.cartData);
         localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success(response.message);
@@ -68,7 +70,6 @@ export class CartService {
         this.cartDataSubject.next(this.cartData);
         this.toastr.success(response.message);
         // localStorage.setItem('cart', JSON.stringify(this.cartData));
-
       },
       (error) => {
         this.toastr.error(error.error.message);

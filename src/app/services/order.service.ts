@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LoggerService } from './logger.service';
-import { Router } from '@angular/router';
+import { environment } from '../component/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  url = 'http://192.168.1.64:5000';
+  url: string = environment.API_URL;
 
   private orderDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
@@ -21,9 +19,6 @@ export class OrderService {
   }
   constructor(
     private http: HttpClient,
-    private toastr: ToastrService,
-    private loggerService: LoggerService,
-    private router: Router
   ) {}
 
   getUserOrder() {
@@ -31,8 +26,7 @@ export class OrderService {
   }
 
   getOrderDetails(orderId: string) {
-    return this.http.get(this.url + '/order/' + orderId)
-    
+    return this.http.get(this.url + '/order/' + orderId);
   }
 
   placeOrder(form: any) {
