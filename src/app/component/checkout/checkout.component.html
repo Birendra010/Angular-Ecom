@@ -69,17 +69,18 @@
     </form>
 
   </div>
-  <div
-    style="min-width: 20rem; max-width: 28rem; padding: 5px; margin: 5px;  border: 1px solid rgb(206, 208, 209); text-align: center;">
+  <div 
+        style="min-width: 20rem; max-width: 28rem; padding: 5px; margin: 5px;  border: 1px solid rgb(206, 208, 209); text-align: center;">
     <h2>Cart Summery</h2>
+    
     <div class="summery">
-      <span>Subtotal</span>
-      <!-- {{cartDetails.cart.totalItems}} -->
-      <span>{{cartDetails.cart.totalPrice}}$</span>
+      <span style="margin-left: 2px;">Subtotal</span>
+      <!-- {{cartDetails.cart.totalPrice }} -->
+      <span>{{cartDetails.totalPrice}}$</span>
     </div>
     <div class="summery">
       <span>Total Items</span>
-      <span>{{cartDetails.cart.totalItems}}</span>
+      <span>{{cartDetails.totalItems}}</span>
     </div>
     <div class="summery">
       <span>Shipping charges</span>
@@ -88,7 +89,7 @@
     <hr>
     <div class="summery">
       <span>Total : </span>
-      <span> {{cartDetails.cart.totalPrice}}$</span>
+      <span> {{cartDetails.totalPrice}}$</span>
     </div>
     <button class=" order  btn btn-primary w-50" [disabled]="form.status === 'INVALID'" (click)="placeOrder()">
       placeOrder

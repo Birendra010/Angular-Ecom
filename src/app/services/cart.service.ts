@@ -69,7 +69,7 @@ export class CartService {
         this.cartData = response;
         this.cartDataSubject.next(this.cartData);
         this.toastr.success(response.message);
-        // localStorage.setItem('cart', JSON.stringify(this.cartData));
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
       },
       (error) => {
         this.toastr.error(error.error.message);

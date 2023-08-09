@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -13,12 +9,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent {
-  
-
-  constructor(
-    private router: Router,
-    private orderService: OrderService,
-  ) {}
+  constructor(private router: Router, private orderService: OrderService) {}
 
   cartDetails: any;
   isClassAdded: boolean = false;
@@ -29,11 +20,10 @@ export class CheckoutComponent {
   ngOnInit() {
     let cart = localStorage.getItem('cart');
 
-
     if (cart) {
-      this.cartDetails = JSON.parse(cart);
-     
-      if (this.cartDetails.items.length === 0) {
+      this.cartDetails = JSON.parse(cart).cart;
+
+      if (this.cartDetails && this.cartDetails.length == 0) {
         this.router.navigate(['/cart']);
       }
     } else {
@@ -67,7 +57,7 @@ export class CheckoutComponent {
   get house() {
     return this.form.get('house');
   }
- 
+
   get city() {
     return this.form.get('city');
   }
@@ -83,7 +73,7 @@ export class CheckoutComponent {
     this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
       if (data) {
         localStorage.removeItem('cart');
-        this.router.navigate(['/order'])
+        this.router.navigate(['/order']);
       }
     });
   }

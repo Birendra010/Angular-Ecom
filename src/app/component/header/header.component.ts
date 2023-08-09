@@ -22,11 +22,14 @@ export class HeaderComponent {
   ngOnInit() {
 
         let cart = localStorage.getItem('cart');
-        if (cart) {
+    if (cart) {
+          let items = JSON.parse(cart).cart;
           this.count=0
-         JSON.parse(cart).cart.items.forEach((x: any) => {
-            return (this.count += x.quantity);
-          });
+      if (items) {
+           items.items.forEach((x: any) => {
+             return (this.count += x.quantity);
+           });
+        }
         }
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {

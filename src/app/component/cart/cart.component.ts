@@ -24,7 +24,7 @@ export class CartComponent {
 
         this.cartDetails = data.cart;
         this.loading = false;
-        // localStorage.setItem('cart', JSON.stringify(this.cartDetails));
+        localStorage.setItem('cart', JSON.stringify(this.cartDetails));
       }
     });
 
