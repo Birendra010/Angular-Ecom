@@ -20,14 +20,14 @@
   </div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid fix-img" >
       
-      <div class="row row-cols-2 row-cols-sm-4 mt-4 g-3  ">
+      <div class="row row-cols-2 row-cols-sm-5 mt-4 g-3  ">
         <div class="col p-2 " *ngFor="let p of products" [routerLink]="['/products',p._id]">
           
-          <div  class="card mx-auto  shadow-lg p-3  bg-white rounded ">
-            <img class="card-img-top " src="{{p.thumbnail}}">
-            <span>{{p.brand}}</span>
+          <div  class="card mx-auto p-1 shadow-lg  bg-white rounded ">
+            <img class="card-img-top  w-100" src="{{p.thumbnail}}">
+            <span class=" text-truncate">{{p.brand}}</span>
             <span class=" text-truncate">{{p.description }}</span>
             
             <div class=" p-2 d-flex flex-row justify-content-between">

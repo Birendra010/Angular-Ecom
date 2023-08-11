@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand navbar-light " style="height: 50px">
+
   <div class="container-fluid">
     <div class="collapse navbar-collapse d-flex flex-md-row" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-flex  flex-row" style="--bs-scroll-height: 100px">
@@ -13,9 +14,9 @@
           <a class="nav-link active" routerLink="/contact">contact-us </a>
         </li>
       </ul>
-      <div>
-        <i class="bi bi-person-circle dropdown  ">
-          <div class="dropdown-content">
+      <div class="dropdown">
+        <i class="bi bi-person-circle  ">
+          <div class="dropdown-content ">
             <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn"
               routerLink="/login">
               Login

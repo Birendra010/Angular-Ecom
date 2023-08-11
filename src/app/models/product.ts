@@ -8,6 +8,7 @@ export interface Product {
   thumbnail:string;
   title: string;
   images: [string];
-  quantity:undefined |number
+  quantity: undefined | number
+  stock : number
 }
 

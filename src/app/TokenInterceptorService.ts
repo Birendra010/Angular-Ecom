@@ -8,18 +8,19 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { UserService } from './services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private userService: UserService) {}
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
+  constructor(private userService: UserService, private toastr:ToastrService ) {}
+  intercept(request: HttpRequest<any>,next: HttpHandler
   ): Observable<HttpEvent<any>> {
-      const token = localStorage.getItem('token')
-        //   this.userService.token;
+      const token =
+          // this.userService.token;
+        // console.log(this.userService.token);
+        localStorage.getItem('token');
     if (token) {
       request = request.clone({
         setHeaders: {
@@ -31,6 +32,11 @@ export class TokenInterceptorService implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401) {
           this.userService.logout();
+        }
+        if (err.status === 409 || err.status === 400  || err.status ===404) {
+          this.toastr.error(err.error.message)
+          
+          
         }
         const error = err.error.message || err.statusText;
         return throwError(error);

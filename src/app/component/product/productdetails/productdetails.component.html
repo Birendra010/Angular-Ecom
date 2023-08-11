@@ -32,13 +32,17 @@
       <p class="bi bi-star text-primary">{{ product.rating }}</p>
 
       <div class="text-start">
-        <!-- <button class="btn btn-primary">Add to Cart</button> -->
 
+
+        <div *ngIf="product.stock === 0">
+          <span style="color: red; text-align: center;">out of stock</span>
+        </div>
 
         
-         <button class="btn btn-primary" [disabled]="loading" (click)="addToCart(product._id)">Add to Cart <span *ngIf="loading"
-            class="spinner-border spinner-border-sm" aria-hidden="true"></span> <i *ngIf="!loading"
+         <button class="btn btn-primary" [disabled]="loading" (click)="addToCart(product._id)" [disabled]="product.stock ==0">Add to Cart <span *ngIf="loading"
+            class="spinner-border spinner-border-sm " aria-hidden="true"></span> <i *ngIf="!loading"
             class="bi bi-cart"></i></button> 
+             
       </div>
     </div>
   </div>

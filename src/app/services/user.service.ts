@@ -11,6 +11,9 @@ import { environment } from '../component/environment/environment';
   providedIn: 'root',
 })
 export class UserService {
+  token: any;
+  loading: boolean = false;
+
   signupForm!: FormGroup;
   integerRegex = /^\d+$/;
   constructor(
@@ -27,35 +30,35 @@ export class UserService {
       (res: any) => {
         localStorage.setItem('token', res.token);
         this.loggerService.isLogged = true;
-        this.toastr.success('signup seccessfull');
+        this.toastr.success(res.message);
         this.router.navigate(['/']);
       },
       (err) => {
-        this.toastr.error(err.error.message);
+        this.toastr.error(err.message);
       }
     );
   }
 
   login(data: any) {
-    return this.http.post(this.url + '/login', data).subscribe(
-      (res: any) => {
-        localStorage.setItem('token', res.token);
-        this.loggerService.isLogged = true;
-        this.cartService.getUserCart();
-        this.router.navigate(['/']);
-        this.toastr.success('login seccessfull');
-      },
-      (err) => {
-        this.toastr.error(err.error.message);
-      }
-    );
+    return this.http.post(this.url + '/login', data).subscribe((res: any) => {
+      localStorage.setItem('token', res.token);
+      this.loggerService.isLogged = true;
+      this.cartService.getUserCart();
+      this.router.navigate(['/']);
+      this.toastr.success(res.message);
+    });
   }
 
   logout() {
+    this.loading = true;
     localStorage.clear();
     this.loggerService.isLogged = false;
     // this.toastr.success('logout seccessfully');
-    this.router.navigate(['/login']);
+    setTimeout(() => {
+      // this.loading = false;
+    },3000)
+    this.router.navigate(['/']);
+    this.loading = false 
   }
 
   forgotPassword(email: any) {
@@ -66,3 +69,5 @@ export class UserService {
     return this.http.put(this.url + '/resetPassword/' + emailToken, form);
   }
 }
+
+

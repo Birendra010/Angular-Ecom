@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from './logger.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+// import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../component/environment/environment';
 
 
@@ -13,8 +14,7 @@ export class CartService {
   count: number = 0;
   cartData: [] = [];
 
-  url:string= environment.API_URL;
- 
+  url: string = environment.API_URL;
 
   constructor(
     private http: HttpClient,
@@ -48,6 +48,11 @@ export class CartService {
     );
   }
 
+
+
+
+  
+
   addToCart(id: string): void {
     this.http.post(this.url + '/cart', { productId: id }).subscribe(
       (response: any) => {
@@ -76,4 +81,15 @@ export class CartService {
       }
     );
   }
+
+  // onChekout() {
+  //   this.http.post(this.url + '/chekout', {
+  //     items: this.cartData
+  //   }).subscribe(async (res:any)=> {
+  //     let stripe = await loadStripe('pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs')
+  //     stripe?.redirectToCheckout({
+  //       sessionId : res.id
+  //     })
+  //   })
+  // }
 }

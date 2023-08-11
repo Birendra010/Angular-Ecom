@@ -5,7 +5,7 @@
 
         <div class="mb-3 border ">
             <label for="email" class="form-label">Email</label>
-            <input style="border: 0.5px solid rgb(224, 218, 218) " type="email" class="form-control border" placeholder="Enter email" formControlName="email" />
+            <input style="border: 0.5px solid rgb(224, 218, 218) " type="email" class="form-control border" id="email" placeholder="Enter email" formControlName="email" />
             <div *ngIf="email && email.touched" class="text-danger">
                 <span *ngIf="email.errors?.['required'] ">Enter email</span>
                 <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>

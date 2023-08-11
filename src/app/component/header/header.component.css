@@ -14,7 +14,8 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  height: max-content;
+  z-index: 200;
 }
 
 .dropdown-content {
@@ -43,3 +44,27 @@
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -51,7 +51,7 @@ export class OrderdetailsComponent {
     this.orderService.cancelOrder(id).subscribe((data: any) => {
       if (data) {
         this.orderDetail = data.order;
-        console.log(this.orderDetail);
+        // console.log(this.orderDetail);
         
         this.loading = false;
       }

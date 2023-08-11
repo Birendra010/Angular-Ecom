@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxStripeModule } from 'ngx-stripe';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,7 @@ import { ResetPasswordComponent } from './component/password/reset-password/rese
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
 import { TokenInterceptorService } from './TokenInterceptorService';
+// import { PaymentComponent } from './component/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { TokenInterceptorService } from './TokenInterceptorService';
     ResetPasswordComponent,
     UpdatePasswordComponent,
     OrderdetailsComponent,
+    // PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { TokenInterceptorService } from './TokenInterceptorService';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    // NgxStripeModule.forRoot('pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'),
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-center',

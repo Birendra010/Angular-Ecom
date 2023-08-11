@@ -14,10 +14,13 @@ import { OrderComponent } from './component/order/order.component';
 import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
+// import { PaymentComponent } from './component/payment/payment.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
   { component: SignupComponent, path: 'signup' },
+  // { component: PaymentComponent, path: 'payment' },
+
   { component: LoginComponent, path: 'login' },
   { component: ProductComponent, path: 'products' },
   { component: ProductdetailsComponent, path: 'products/:id' },
@@ -25,7 +28,11 @@ const routes: Routes = [
   { component: CartComponent, path: 'cart', canActivate: [AuthGuard] },
   { component: CheckoutComponent, path: 'checkout', canActivate: [AuthGuard] },
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
-  { component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard] },
+  {
+    component: OrderdetailsComponent,
+    path: 'order/:orderId',
+    canActivate: [AuthGuard],
+  },
   { component: ResetPasswordComponent, path: 'forgotPassword' },
   { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
 

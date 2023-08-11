@@ -30,7 +30,7 @@ export class CartComponent {
 
     setTimeout(() => {
       this.loading = false;
-    }, 2000);
+    }, 1000);
   }
 
   cartUpdate(productId: string, quantity: number) {
@@ -40,8 +40,10 @@ export class CartComponent {
       if (data.cart) {
         this.cartItems = data.cart.items;
         this.cartDetails = data.cart;
+        this.loading = false;
       }
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
+    // this.loading = false;
   }
 }

@@ -1,7 +1,7 @@
 <div>
-  <ngb-carousel *ngIf="popularProducts" class="m3-5">
+  <ngb-carousel *ngIf="popularProducts" >
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
-      <div class="picsum-img-wrapper" style="margin-top: 40px;">
+      <div class="picsum-img-wrapper" style="margin-top: 40px; ">
         <img
           class="product-header-img w-100"
           src="{{ item.thumbnail }}"
@@ -9,30 +9,33 @@
         />
       </div>
 
-      
-      <div class="carousel-caption" >
+      <div class="carousel-caption">
         <h3>{{ item.brand }}</h3>
         <p>{{ item.description }}</p>
       </div>
     </ng-template>
   </ngb-carousel>
 
-  <div class="container-fluid">
-    <div class="row row-cols-2 row-cols-sm-4 mt-4 g-3">
+  <div class="container-fluid  fix-img">
+    <div class="row row-cols-2 row-cols-sm-5 mt-4 g-3" >
       <div class="col p-2" *ngFor="let p of HomeProducts">
-        <div class="card mx-auto shadow-lg p-3 bg-white rounded" (click)="productPage(p._id)">
+        <div
+          class="card mx-auto shadow-lg p-2 w-100 bg-white rounded"
+          (click)="productPage(p._id)"
+        >
           <img class="card-img-top" src="{{ p.thumbnail }}" />
-          <span>{{ p.brand }}</span>
+          <span  class="text-truncate">{{ p.brand }}</span>
           <span class="text-truncate">{{ p.description }}</span>
 
-          <div class="p-2 d-flex flex-row justify-content-between">
+          <div class=" d-flex flex-row justify-content-between">
             <span>${{ p.price }}</span>
             <span class="bi bi-star">{{ p.rating }}</span>
           </div>
         </div>
       </div>
     </div>
-
-   
   </div>
 </div>
+
+
+

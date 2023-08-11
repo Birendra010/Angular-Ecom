@@ -66,6 +66,7 @@ export class HeaderComponent {
   logout() {
     this.count = 0;
     this.userService.logout();
+    
   }
 
 
