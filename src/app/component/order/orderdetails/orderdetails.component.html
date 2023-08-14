@@ -11,7 +11,7 @@
     <div *ngIf="orderDetail" class="box">
   
         <div *ngFor="let item of orderDetail.items">
-            <div class="card m-2">
+            <div class="card m-2 w-100 ">
                 <div class="card-body" class="p-2 d-flex flex-row gap-2">
                     <img src="{{item.productId.thumbnail}}" alt="" style="height:5rem; width: 5rem;">
                     <div class="d-flex flex-column w-50">
@@ -23,7 +23,7 @@
                         <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} * {{item.quantity }} </span>
                         
                         
-                        <button class="btn btn-danger btn-sm" (click)="cancelItem(item.productId._id)">Cancel
+                        <button class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
                             Item</button>
                     </div>
 

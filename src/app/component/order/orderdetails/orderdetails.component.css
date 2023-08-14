@@ -2,3 +2,11 @@
     min-width:16rem;  max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 45px;
     text-align: start;
 }
+
+.box {
+  min-width: 65%; /* Adjust the width as needed */
+  /* padding: 20px;  */
+  /* background-color: #f0f0f0;  */
+  /* border-radius: 10px;  */
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+}

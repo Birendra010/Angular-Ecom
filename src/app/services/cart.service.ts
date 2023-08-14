@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from './logger.service';
@@ -6,13 +6,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 // import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../component/environment/environment';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   count: number = 0;
-  cartData: [] = [];
+  cartData: any;
 
   url: string = environment.API_URL;
 
@@ -20,7 +19,7 @@ export class CartService {
     private http: HttpClient,
     private toastr: ToastrService,
     private loggerService: LoggerService
-  ) {}
+  ) { }
 
   private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
@@ -29,67 +28,168 @@ export class CartService {
   getCartData(): Observable<any> {
     return this.cartDataSubject.asObservable();
   }
-
   getUserCart(): void {
-    this.http.get(this.url + '/cart', {}).subscribe(
-      (response: any) => {
+    let cart = localStorage.getItem('cart');
+    if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
+      if (cart) {
+        this.cartData = JSON.parse(cart);
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
+        this.toastr.success('item added to cart');
+        return this.cartDataSubject.next(this.cartData);
+      } else {
+        return this.cartDataSubject.next(this.cartData); 
+      }
+    } else {
+      this.http.get(this.url + '/cart', {}).subscribe((response: any) => {
         this.cartData = response;
+        // console.log(this.cartData);
+        
 
         this.cartDataSubject.next(this.cartData);
         localStorage.setItem('cart', JSON.stringify(this.cartData));
-      },
-      (error) => {
-        this.toastr.error(error.error.message || error.error.error);
-        if (error.status === 500 || error.status === 401) {
-          localStorage.removeItem('token');
-          this.loggerService.isLogged = false;
+      });
+      //   (error) => {
+      //     this.toastr.error(error.error.message || error.error.error);
+      //     if (error.status === 500 || error.status === 401) {
+      //       localStorage.removeItem('token');
+      //       this.loggerService.isLogged = false;
+      //     }
+      //   }
+      // );
+    }
+  }
+
+  saveLocalCartData() {
+    let cart = localStorage.getItem('cart');
+    if (cart) {
+      cart = JSON.parse(cart);
+      this.http
+        .put(this.url + '/local-cart', this.cartData)
+        .subscribe((response: any) => {
+          this.cartData = response.cart;
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+          return this.cartDataSubject.next(this.cartData);
+        });
+    }
+  }
+
+  addToCart(data: any): void {
+    if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
+      let cart = localStorage.getItem('cart');
+      if (cart) {
+        let localCart = JSON.parse(cart);
+        let cartItemIndex = localCart.cartItems.findIndex(
+          (x: any) => x.productId._id == data._id
+        );
+        //  if item is already present in cart
+        if (cartItemIndex >= 0) {
+          let product = localCart.cartItems[cartItemIndex];
+          product.quantity += 1;
+          localCart.totalItems += 1;
+          localCart.totalPrice += product.productId.price;
+          this.cartData = localCart;
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+          return this.cartDataSubject.next(this.cartData);
+        } else {
+          this.cartData = {
+            cartItems: [
+              ...localCart.cartItems,
+              { productId: data, quantity: 1 },
+            ],
+            totalItems: localCart.totalItems + 1,
+            totalPrice: localCart.totalPrice + data.price,
+          };
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+          this.toastr.success('product added to cart');
+          return this.cartDataSubject.next(this.cartData); // Emit the addto cart data
+        }
+      } else {
+        this.cartData = {
+          cartItems: [{ productId: data, quantity: 1 }],
+          totalItems: 1,
+          totalPrice: data.price,
+        };
+        localStorage.setItem('cart', JSON.stringify(this.cartData));
+        this.toastr.success('product added to cart');
+        return this.cartDataSubject.next(this.cartData); // Emit
+      }
+    } else {
+      this.http
+        .post(this.url + '/cart', { productId: data._id })
+        .subscribe((response: any) => {
+          this.cartData = response;
+          this.cartDataSubject.next(this.cartData);
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+          this.toastr.success(response.message);
+        });
+    }
+  }
+
+
+
+
+
+
+  cartUpdate(data: any, quantity: number): void {
+    if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
+      let cart = localStorage.getItem('cart');
+      // console.log(cart);
+      
+      if (cart) {
+        let localCart = JSON.parse(cart);
+        let cartItemIndex = localCart.cartItems.findIndex(
+          (x: any) => x.productId._id == data
+        );
+        // index product in cartItems
+        let product = localCart.cartItems[cartItemIndex];
+        //  if user removed the item
+        if (quantity < 1) {
+          localCart.totalPrice -= product.quantity * product.productId.price
+          localCart.totalItems -= product.quantity;
+          localCart.cartItems.splice(cartItemIndex, 1)
+          this.cartData = localCart;
+          localStorage.setItem('cart', JSON.stringify(localCart));
+          return this.cartDataSubject.next(localCart);
+        }
+        //  if user increase quantity
+        else if (quantity > product.quantity) {
+          product.quantity += 1;
+          localCart.totalItems += 1;
+          localCart.totalPrice += product.productId.price;
+          this.cartData = localCart;
+          localStorage.setItem('cart', JSON.stringify(localCart));
+          return this.cartDataSubject.next(localCart);
+        }
+        //  if user decrease quantity
+        else if (quantity < product.quantity) {
+          product.quantity -= 1;
+          localCart.totalItems -= 1;
+          localCart.totalPrice -= product.productId.price;
+          this.cartData = localCart;
+          localStorage.setItem('cart', JSON.stringify(localCart));
+          return this.cartDataSubject.next(localCart);
         }
       }
-    );
+    }
+    //  if user logged in 
+    else {
+      this.http.put(this.url + '/cart', { productId: data, quantity }).subscribe(
+        (response: any) => {
+          this.cartData = response;
+          this.cartDataSubject.next(this.cartData);
+          this.toastr.success(response.message);
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+        }
+      );
+    }
+
+
+
   }
-
-
-
-
-  
-
-  addToCart(id: string): void {
-    this.http.post(this.url + '/cart', { productId: id }).subscribe(
-      (response: any) => {
-        this.cartData = response;
-
-        this.cartDataSubject.next(this.cartData);
-        localStorage.setItem('cart', JSON.stringify(this.cartData));
-        this.toastr.success(response.message);
-      },
-      (error) => {
-        this.toastr.warning('please login');
-      }
-    );
-  }
-
-  cartUpdate(productId: string, quantity: number): void {
-    this.http.put(this.url + '/cart', { productId, quantity }).subscribe(
-      (response: any) => {
-        this.cartData = response;
-        this.cartDataSubject.next(this.cartData);
-        this.toastr.success(response.message);
-        localStorage.setItem('cart', JSON.stringify(this.cartData));
-      },
-      (error) => {
-        this.toastr.error(error.error.message);
-      }
-    );
-  }
-
-  // onChekout() {
-  //   this.http.post(this.url + '/chekout', {
-  //     items: this.cartData
-  //   }).subscribe(async (res:any)=> {
-  //     let stripe = await loadStripe('pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs')
-  //     stripe?.redirectToCheckout({
-  //       sessionId : res.id
-  //     })
-  //   })
-  // }
 }
+
+
+
+
+////Addcart, updateCart,getCart ==> without login 
+// stripe payment  

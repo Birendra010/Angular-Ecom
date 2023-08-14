@@ -1,74 +1,79 @@
-// // import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 
-// import { Component, AfterViewInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environment/environment';
+declare var Stripe: any;
 
-// declare const Stripe:any;
 
-// @Component({
-//   selector: 'app-payment',
-//   templateUrl: './payment.component.html',
-//   styleUrls: ['./payment.component.css'],
-// })
-// export class PaymentComponent implements AfterViewInit {
-//   stripe: any;
-//   card: any;
-//   clientSecret: any;
+@Component({
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.css'],
+})
+export class PaymentComponent {
+  url: string = environment.API_URL;
 
-//   constructor(private http: HttpClient) {}
-//   ngAfterViewInit() {
-//     this.stripe = Stripe(
-//       'pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'
-//     );
-//     this.createPaymentIntent();
-//   }
-//    async createPaymentIntent() {
-//     const response = await this.http
-//       .post('/payment', {
-//         amount: 1000, // Amount in cents
-//         currency: 'usd',
-//       })
-//       .toPromise();
+  @ViewChild('cardElement')
+  cardElement!: ElementRef;
 
-//     this.clientSecret = response;
-//     this.setupElements();
-//   }
+  stripe: any;
+  card: any;
+  clientSecret!: string;
+  error!: string;
 
-//   setupElements() {
-//     const elements = this.stripe.elements();
-//     this.card = elements.create('card');
-//     this.card.mount('#card-element');
-//   }
+  constructor(private http: HttpClient) {}
 
-//   async onSubmit() {
-//     const { token, error } = await this.stripe.createToken(this.card);
+  ngOnInit(): void {
+    this.stripe = Stripe(
+      'pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'
+    );
+    this.createPaymentIntent();
+  }
 
-//     if (error) {
-//       console.error(error);
-//     } else {
-//       this.processPayment(token.id);
-//     }
-//   }
+  createPaymentIntent(): void {
+    this.http
+      .post<any>('http://localhost:5000/create-payment-intent', {
+        amount: 1000,
+      })
+      .subscribe(
+        (data) => {
+          this.clientSecret = data.clientSecret;
+          this.setupCardElement();
+        },
+        (error) => {
+          console.error(error);
+          this.error = 'Failed to create payment intent.';
+        }
+      );
+  }
 
-//   async processPayment(token: any) {
-//     try {
-//       const response = await this.http
-//         .post('/process-payment', {
-//           token,
-//           amount: 1000,
-//         })
-//         .toPromise();
+  setupCardElement(): void {
+    const elements = this.stripe.elements();
+    this.card = elements.create('card');
+    this.card.mount(this.cardElement.nativeElement);
+  }
 
-//       if (response) {
-//         console.log('Payment successful');
-//       } else {
-//         console.error('Payment failed');
-//       }
-//     } catch (error) {
-//       console.error('An error occurred while processing payment');
-//     }
-//   }
-// }
+  async onSubmit(): Promise<void> {
+    const { token, error } = await this.stripe.createToken(this.card);
+
+    if (error) {
+      console.error(error);
+    } else {
+      // Send the token to your server for processing
+      this.http
+        .post(this.url + '/create-payment-intent', { token: token.id })
+        .subscribe(
+          (data) => {
+            console.log('Payment successful!', data);
+          },
+          (error) => {
+            console.error('Payment error:', error);
+          }
+        );
+    }
+  }
+}
 
 
 

@@ -8,8 +8,10 @@
     <h1 class="text-center mt-5"> No Order found </h1>
 </div>
 
+
 <h1 *ngIf="orders && orders.length > 0 " class="text-center">My orders</h1>
-<div class="d-flex flex-column gap-2 p-3" style="width:60rem ; margin-left: 10rem; ">
+<div class="d-flex flex-column  gap-2 p-3" style="max-width: 100% ;display: flex; justify-content: center;
+align-items: center;">
     <div *ngIf="orders">
         <div class="card  px-3 mt-2 " *ngFor="let orders of orders">
 

@@ -40,7 +40,7 @@ export class ProductdetailsComponent implements OnInit {
     this.image = url;
   }
 
-  addToCart(id:string) {
+  addToCart(id:any) {
     this.loading = true;
     this.cartService.addToCart(id);
     this.cartService.getCartData();
