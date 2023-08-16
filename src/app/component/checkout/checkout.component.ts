@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent {
-  constructor(private router: Router, private orderService: OrderService) {}
+  constructor(private router: Router, private orderService: OrderService , private cartService : CartService ) {}
 
   cartDetails: any;
   isClassAdded: boolean = false;
@@ -69,12 +70,20 @@ export class CheckoutComponent {
   }
 
   placeOrder() {
-    this.addClass();
-    this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
-      if (data) {
-        localStorage.removeItem('cart');
-        this.router.navigate(['/order']);
-      }
-    });
+    if (this.form.errors) {
+      return
+    } else {
+      this.addClass();
+      this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
+        if (data) {
+          localStorage.removeItem('cart');
+          this.cartService.getUserCart();
+          this.router.navigate(['/order']);
+        }
+      });
+    }
+
   }
+
+  
 }

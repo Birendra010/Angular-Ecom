@@ -65,7 +65,9 @@ export class HeaderComponent {
 
   logout() {
     this.count = 0;
+    this.cartService.cartData =''
     this.userService.logout();
+
     
   }
 

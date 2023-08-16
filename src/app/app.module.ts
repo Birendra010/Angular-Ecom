@@ -24,7 +24,10 @@ import { ResetPasswordComponent } from './component/password/reset-password/rese
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
 import { TokenInterceptorService } from './TokenInterceptorService';
-import { PaymentComponent } from './component/payment/payment.component';
+import { FailedComponent } from './component/payment/failed/failed.component';
+import { SuccessComponent } from './component/payment/success/success.component';
+// import { PaymentPageComponent } from './component/payment/payment-page/payment-page.component';
+import { StripeComponent } from './component/payment/stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { PaymentComponent } from './component/payment/payment.component';
     ResetPasswordComponent,
     UpdatePasswordComponent,
     OrderdetailsComponent,
-    PaymentComponent,
+    FailedComponent,
+    SuccessComponent,
+    // PaymentPageComponent,
+    StripeComponent,
   ],
   imports: [
     BrowserModule,

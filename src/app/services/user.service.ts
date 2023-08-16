@@ -29,9 +29,10 @@ export class UserService {
     return this.http.post(this.url + '/signup', data).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
+        this.router.navigate(['/']);
+         this.cartService.saveLocalCartData();
         this.loggerService.isLogged = true;
         this.toastr.success(res.message);
-        this.router.navigate(['/']);
       },
       (err) => {
         this.toastr.error(err.message);
@@ -42,9 +43,10 @@ export class UserService {
   login(data: any) {
     return this.http.post(this.url + '/login', data).subscribe((res: any) => {
       localStorage.setItem('token', res.token);
+      this.router.navigate(['/']);
+       this.cartService.saveLocalCartData();
       this.loggerService.isLogged = true;
       this.cartService.getUserCart();
-      this.router.navigate(['/']);
       this.toastr.success(res.message);
     });
   }
@@ -52,6 +54,7 @@ export class UserService {
   logout() {
     this.loading = true;
     localStorage.clear();
+    this.cartService.cartData = ' ';
     this.loggerService.isLogged = false;
     // this.toastr.success('logout seccessfully');
     setTimeout(() => {

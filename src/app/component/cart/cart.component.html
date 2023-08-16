@@ -4,16 +4,17 @@
     </div>
 </div>
 
-<div *ngIf="cartItems.length === 0">
+<div *ngIf=" items &&  items.length === 0" >
     <h1 class="text-center">Your cart is empty</h1>
-</div>
+    <button class="btn btn-primary  " style="margin-left: 42%; margin-top: 2.5rem;" routerLink="/products">continue shopping <i class="bi bi-arrow-right " ></i></button>
 
-<div class="p-4 d-flex flex-column flex-md-row gap-3 justify-content-center" *ngIf="cartItems.length">
+</div>
+<!-- {{items.length }} -->
+<div class="p-4 d-flex flex-column flex-md-row gap-3 justify-content-center" *ngIf="items && items.length">
     <div style="max-width: 45rem">
         <h1>Shopping Cart</h1>
         <div>
-            <!-- {{cartItems | json}} -->
-            <div *ngFor="let items of cartItems"
+            <div *ngFor="let items of items"
                 class="d-flex flex-row gap-2 p-2 mt-1 justify-content-between border shadow-lg">
                 <div class="d-flex flex-row gap-2">
 
@@ -26,11 +27,11 @@
                         </h6>
                         <div class="quantityBtn">
                             <i class="bi bi-dash-lg px-2 bg-danger mx-1 rounded"
-                                (click)="cartUpdate(items.productId._id, items.quantity - 1)"></i>
+                                (click)="cartUpdate(items.productId, items.quantity - 1)"></i>
                             <input type="text" style="width: 50px; height: 20px" value="{{ items.quantity }}"
                                 disabled />
                             <i class="bi bi-plus-lg px-2 bg-primary mx-1 rounded"
-                                (click)="cartUpdate(items.productId._id, items.quantity + 1)"></i>
+                                (click)="cartUpdate(items.productId, items.quantity + 1)"></i>
                         </div>
                         <span *ngIf="items.productId.stock === 0" style="color: red">out of stock
                         </span>
@@ -48,7 +49,7 @@
         </div>
     </div>
 
-    <div style=" min-width: 16rem; max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 45px;">
+    <div style=" min-width: 16rem; max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 50px; margin-left: 5rem;">
         <h2>Cart Summery</h2>
         <div class="summery">
             <span>Subtotal</span>

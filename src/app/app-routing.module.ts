@@ -14,27 +14,26 @@ import { OrderComponent } from './component/order/order.component';
 import { ResetPasswordComponent } from './component/password/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './component/password/update-password/update-password.component';
 import { OrderdetailsComponent } from './component/order/orderdetails/orderdetails.component';
-// import { PaymentComponent } from './component/payment/payment.component';
+import { FailedComponent } from './component/payment/failed/failed.component';
+import { SuccessComponent } from './component/payment/success/success.component';
+import { StripeComponent } from './component/payment/stripe/stripe.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
   { component: SignupComponent, path: 'signup' },
-  // { component: PaymentComponent, path: 'payment' },
-
+  {component : StripeComponent, path:'payments'},
+  { component: FailedComponent, path: 'failed' },
+  { component: SuccessComponent, path: 'success' },
   { component: LoginComponent, path: 'login' },
   { component: ProductComponent, path: 'products' },
   { component: ProductdetailsComponent, path: 'products/:id' },
   { component: ContactUsComponent, path: 'contact' },
-  { component: CartComponent, path: 'cart'},
+  { component: CartComponent, path: 'cart' },
   { component: CheckoutComponent, path: 'checkout', canActivate: [AuthGuard] },
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
-  {
-    component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard],
-  },
+  { component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard],},
   { component: ResetPasswordComponent, path: 'forgotPassword' },
   { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
-
-  // { path: 'search/:keyword', component: ProductComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

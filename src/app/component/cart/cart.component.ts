@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { loadStripe} from '@stripe/stripe-js'
+// import { loadStripe} from '@stripe/stripe-js'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment/environment';
+import { identifierName } from '@angular/compiler';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -12,29 +13,42 @@ export class CartComponent {
   constructor(private cartService: CartService, private http: HttpClient) {}
 
   cartDetails: any;
-  cartItems: any[] = [];
+  items: any[] = [];
   loading: boolean = false;
   count: number = 0;
   url: string = environment.API_URL;
+
+
+
   ngOnInit(): void {
     this.loading = true;
     let cart = localStorage.getItem('cart');
+    // console.log(cart);
+
     if (cart && !localStorage.getItem('token')) {
       let localCart = JSON.parse(cart);
-      this.cartItems = localCart.cartItems;
+      // console.log(localCart);
+
+      this.items = localCart.items;
       this.cartDetails = localCart;
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
       this.loading = false;
+      // console.log(localStorage);
+      // console.log(cart);
     } else if (!cart && !localStorage.getItem('token')) {
     } else {
       this.cartService.getUserCart();
+
       this.cartService.getCartData().subscribe((data: any) => {
+        // console.log(data);
+
         if (data.cart) {
-          this.cartItems = data.cart.items;
+          this.items = data.cart.items;
 
           this.cartDetails = data.cart;
           this.loading = false;
           localStorage.setItem('cart', JSON.stringify(this.cartDetails));
+          // console.log(localStorage);
         }
       });
     }
@@ -48,28 +62,16 @@ export class CartComponent {
     this.loading = true;
     this.cartService.cartUpdate(productId, quantity);
     this.cartService.getCartData().subscribe((data: any) => {
-      if (data.cart) {
-        this.cartItems = data.cart.items;
-        this.cartDetails = data.cart;
+      if (data) {
+        this.items = data.items;
+        this.cartDetails = data
         // this.loading = false;
       }
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
     // this.loading = false;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
-
-  // onCheckout(): void {
-  //   this.http
-  //     .post(this.url + '/checkout', {
-  //       cartItems: this.cartDetails
-  //     })
-  //     .subscribe(async (res: any) => {
-  //       let stripe = await loadStripe(
-  //         'pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'
-  //       );
-  //       stripe?.redirectToCheckout({
-  //         sessionId: res.id,
-  //       });
-  //     });
-  // }
 }

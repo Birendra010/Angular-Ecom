@@ -11,8 +11,7 @@ import { environment } from '../component/environment/environment';
 })
 export class CartService {
   count: number = 0;
-  cartData: any;
-
+  cartData: any
   url: string = environment.API_URL;
 
   constructor(
@@ -21,7 +20,7 @@ export class CartService {
     private loggerService: LoggerService
   ) { }
 
-  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+  private cartDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     []
   );
 
@@ -30,9 +29,13 @@ export class CartService {
   }
   getUserCart(): void {
     let cart = localStorage.getItem('cart');
+    // console.log(cart);
+    
     if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
       if (cart) {
         this.cartData = JSON.parse(cart);
+        console.log(this.cartData);
+        
         localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success('item added to cart');
         return this.cartDataSubject.next(this.cartData);
@@ -43,8 +46,6 @@ export class CartService {
       this.http.get(this.url + '/cart', {}).subscribe((response: any) => {
         this.cartData = response;
         // console.log(this.cartData);
-        
-
         this.cartDataSubject.next(this.cartData);
         localStorage.setItem('cart', JSON.stringify(this.cartData));
       });
@@ -78,12 +79,14 @@ export class CartService {
       let cart = localStorage.getItem('cart');
       if (cart) {
         let localCart = JSON.parse(cart);
-        let cartItemIndex = localCart.cartItems.findIndex(
+        console.log(localCart);
+        
+        let cartItemIndex = localCart.items.findIndex(
           (x: any) => x.productId._id == data._id
         );
         //  if item is already present in cart
         if (cartItemIndex >= 0) {
-          let product = localCart.cartItems[cartItemIndex];
+          let product = localCart.items[cartItemIndex];
           product.quantity += 1;
           localCart.totalItems += 1;
           localCart.totalPrice += product.productId.price;
@@ -92,8 +95,8 @@ export class CartService {
           return this.cartDataSubject.next(this.cartData);
         } else {
           this.cartData = {
-            cartItems: [
-              ...localCart.cartItems,
+            items: [
+              ...localCart.items,
               { productId: data, quantity: 1 },
             ],
             totalItems: localCart.totalItems + 1,
@@ -105,7 +108,7 @@ export class CartService {
         }
       } else {
         this.cartData = {
-          cartItems: [{ productId: data, quantity: 1 }],
+          items: [{ productId: data, quantity: 1 }],
           totalItems: 1,
           totalPrice: data.price,
         };
@@ -137,26 +140,36 @@ export class CartService {
       
       if (cart) {
         let localCart = JSON.parse(cart);
-        let cartItemIndex = localCart.cartItems.findIndex(
-          (x: any) => x.productId._id == data
+        // console.log(data);
+        let cartItemIndex = localCart.items.findIndex(
+          (x: any) => x.productId._id == data._id
         );
-        // index product in cartItems
-        let product = localCart.cartItems[cartItemIndex];
+        // console.log(cartItemIndex);
+        
+        // index product in items
+        let product = localCart.items[cartItemIndex];
+        // console.log(product);
+        
         //  if user removed the item
+
         if (quantity < 1) {
           localCart.totalPrice -= product.quantity * product.productId.price
           localCart.totalItems -= product.quantity;
-          localCart.cartItems.splice(cartItemIndex, 1)
+          localCart.items.splice(cartItemIndex, 1)
           this.cartData = localCart;
           localStorage.setItem('cart', JSON.stringify(localCart));
           return this.cartDataSubject.next(localCart);
         }
         //  if user increase quantity
         else if (quantity > product.quantity) {
+          // console.log(product,quantity);
           product.quantity += 1;
           localCart.totalItems += 1;
           localCart.totalPrice += product.productId.price;
           this.cartData = localCart;
+          // console.log(this.cartData, localCart
+          // );
+          
           localStorage.setItem('cart', JSON.stringify(localCart));
           return this.cartDataSubject.next(localCart);
         }
@@ -191,5 +204,4 @@ export class CartService {
 
 
 
-////Addcart, updateCart,getCart ==> without login 
-// stripe payment  
+

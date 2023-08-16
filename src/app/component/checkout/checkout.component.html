@@ -75,7 +75,7 @@
     
     <div class="summery">
       <span style="margin-left: 2px;">Subtotal</span>
-      <!-- {{cartDetails.cart.totalPrice }} -->
+      <!-- {{cartDetails | json }} -->
       <span>{{cartDetails.totalPrice}}$</span>
     </div>
     <div class="summery">
@@ -91,8 +91,11 @@
       <span>Total : </span>
       <span> {{cartDetails.totalPrice}}$</span>
     </div>
-    <button class=" order  btn btn-primary w-50" [disabled]="form.status === 'INVALID'" (click)="placeOrder()">
+    <!-- <button class=" order  btn btn-primary w-50" [disabled]="form.status === 'INVALID'" (click)="placeOrder()">
+
       placeOrder
-    </button>
+    </button> -->
+
+<app-stripe  [order]="cartDetails" [form]="form"   ></app-stripe>
   </div>
 </div>

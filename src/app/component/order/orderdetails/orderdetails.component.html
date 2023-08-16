@@ -4,7 +4,8 @@
     </div>
 </div>
 
-<h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
+<h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled  </h1>
+
 
 <div *ngIf="orderDetail && orderDetail.status !== 'canceled'"
     class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
