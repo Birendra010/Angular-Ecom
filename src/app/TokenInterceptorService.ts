@@ -39,7 +39,7 @@ export class TokenInterceptorService implements HttpInterceptor {
           
           
         }
-        const error = err.error.message || err.statusText;
+        const error = err.message||  err.error.message || err.statusText;
         return throwError(error);
       })
     );

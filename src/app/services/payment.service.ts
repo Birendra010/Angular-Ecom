@@ -9,7 +9,7 @@ export class PaymentService {
 
   url: string = environment.API_URL;
   constructor(private http: HttpClient) {}
-  payment(order: any) {
-    return this.http.post(this.url + '/payment', { items: order });
+  payment(order: any , form : any) {
+    return this.http.post(this.url + '/payment', { items: order , form});
   }
 }

@@ -1,15 +1,14 @@
-<div *ngIf="loading" class="loader w-100 h-100 d-flex justify-content-center position-absolute">
+<!-- <div *ngIf="loading" class="loader w-100 h-100 d-flex justify-content-center position-absolute">
     <div class="spinner-border mx-auto" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
-</div>
+</div> -->
 
 <div *ngIf=" items &&  items.length === 0" >
     <h1 class="text-center">Your cart is empty</h1>
     <button class="btn btn-primary  " style="margin-left: 42%; margin-top: 2.5rem;" routerLink="/products">continue shopping <i class="bi bi-arrow-right " ></i></button>
 
 </div>
-<!-- {{items.length }} -->
 <div class="p-4 d-flex flex-column flex-md-row gap-3 justify-content-center" *ngIf="items && items.length">
     <div style="max-width: 45rem">
         <h1>Shopping Cart</h1>
@@ -17,6 +16,7 @@
             <div *ngFor="let items of items"
                 class="d-flex flex-row gap-2 p-2 mt-1 justify-content-between border shadow-lg">
                 <div class="d-flex flex-row gap-2">
+                  
 
                     <img src="{{ items.productId.thumbnail }}" alt="{{ items.productId.title }}"
                         style="width: 5rem; height: 5.5rem; object-fit: fill" />
@@ -39,11 +39,10 @@
                 </div>
                 <span style="  width: 8.5rem;  margin: 2px;  display: flex;  flex-direction: column;  justify-content: space-between;  text-align: right;">
                     <span>
-                        <!-- {{cartDetails | json}} -->
                         <i class="bi bi-currency-dollar"></i>
                         <span>{{ items.productId.price }} * {{ items.quantity }}</span>
                     </span>
-                    <i class="bi bi-trash text-danger" title="Delete" (click)="cartUpdate(items.productId._id, 0)"></i>
+                    <i class="bi bi-trash text-danger" title="Delete" (click)="cartUpdate(items.productId, 0)"></i>
                 </span>
             </div>
         </div>
@@ -53,19 +52,20 @@
         <h2>Cart Summery</h2>
         <div class="summery">
             <span>Subtotal</span>
-            <span>{{ cartDetails.totalPrice }}$</span>
+            <span>{{ cartDetails.cart.totalPrice }}$</span>
         </div>
         <div class="summery">
             <span>Total Items</span>
-            <span>{{ cartDetails.totalItems }}</span>
+            <span>{{ cartDetails.cart.totalItems }}</span>
         </div>
         <div class="summery">
-            <span>Shipping charges</span>
+            <span>Shipping charges </span>
+            <span>0</span>
         </div>
         <hr />
         <div class="summery">
             <span>Total</span>
-            <span>{{ cartDetails.totalPrice }}$</span>
+            <span>{{ cartDetails.cart.totalPrice }}$</span>
         </div>
         <button class="btn btn-primary w-75 m-auto mt-3 mb-2" routerLink="/checkout">
             Procced to checkout

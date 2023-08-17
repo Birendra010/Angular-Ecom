@@ -23,10 +23,12 @@ export class HeaderComponent {
 
         let cart = localStorage.getItem('cart');
     if (cart) {
-          let items = JSON.parse(cart).cart;
+      let items = JSON.parse(cart)
+      // console.log(items);
+      
           this.count=0
       if (items) {
-           items.items.forEach((x: any) => {
+           items.cart.items.forEach((x: any) => {
              return (this.count += x.quantity);
            });
         }
@@ -39,15 +41,7 @@ export class HeaderComponent {
         });
       }
     });
-    // this.cartService.getCartData().subscribe((data: any) => {
-    //   if (data.cart) {
-    //     this.count=0
-    //      data.cart.items.forEach((x: any) => {
-    //        return (this.count += x.quantity);
-           
-    //     });
-    //   }
-    // });
+ 
 
     this.router.events.subscribe((val: any) => {
       if (val.url) {
@@ -65,7 +59,7 @@ export class HeaderComponent {
 
   logout() {
     this.count = 0;
-    this.cartService.cartData =''
+    this.cartService.cartData = '';
     this.userService.logout();
 
     

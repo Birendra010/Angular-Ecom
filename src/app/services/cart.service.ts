@@ -11,16 +11,16 @@ import { environment } from '../component/environment/environment';
 })
 export class CartService {
   count: number = 0;
-  cartData: any
+  cartData: any;
   url: string = environment.API_URL;
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     private loggerService: LoggerService
-  ) { }
+  ) {}
 
-  private cartDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
 
@@ -30,17 +30,17 @@ export class CartService {
   getUserCart(): void {
     let cart = localStorage.getItem('cart');
     // console.log(cart);
-    
+
     if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
       if (cart) {
         this.cartData = JSON.parse(cart);
         console.log(this.cartData);
-        
+
         localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success('item added to cart');
         return this.cartDataSubject.next(this.cartData);
       } else {
-        return this.cartDataSubject.next(this.cartData); 
+        return this.cartDataSubject.next(this.cartData);
       }
     } else {
       this.http.get(this.url + '/cart', {}).subscribe((response: any) => {
@@ -59,11 +59,13 @@ export class CartService {
       // );
     }
   }
-
+///save data local to db after login
   saveLocalCartData() {
     let cart = localStorage.getItem('cart');
     if (cart) {
-      cart = JSON.parse(cart);
+      cart = JSON.parse(cart)
+      // console.log(cart);
+      
       this.http
         .put(this.url + '/local-cart', this.cartData)
         .subscribe((response: any) => {
@@ -78,29 +80,28 @@ export class CartService {
     if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
       let cart = localStorage.getItem('cart');
       if (cart) {
-        let localCart = JSON.parse(cart);
-        console.log(localCart);
-        
-        let cartItemIndex = localCart.items.findIndex(
+        let localCart = JSON.parse(cart)
+// console.log(localCart);
+
+        let cartItemIndex = localCart.cart.items.findIndex(
           (x: any) => x.productId._id == data._id
         );
         //  if item is already present in cart
         if (cartItemIndex >= 0) {
-          let product = localCart.items[cartItemIndex];
+          let product = localCart.cart.items[cartItemIndex];
           product.quantity += 1;
-          localCart.totalItems += 1;
-          localCart.totalPrice += product.productId.price;
+          localCart.cart.totalItems += 1;
+          localCart.cart.totalPrice += product.productId.price;
           this.cartData = localCart;
           localStorage.setItem('cart', JSON.stringify(this.cartData));
           return this.cartDataSubject.next(this.cartData);
         } else {
           this.cartData = {
-            items: [
-              ...localCart.items,
-              { productId: data, quantity: 1 },
-            ],
-            totalItems: localCart.totalItems + 1,
-            totalPrice: localCart.totalPrice + data.price,
+            cart: {
+              items: [...localCart.cart.items, { productId: data, quantity: 1 }],
+              totalItems: localCart.cart.totalItems + 1,
+              totalPrice: localCart.cart.totalPrice + data.price,
+            },
           };
           localStorage.setItem('cart', JSON.stringify(this.cartData));
           this.toastr.success('product added to cart');
@@ -108,9 +109,11 @@ export class CartService {
         }
       } else {
         this.cartData = {
-          items: [{ productId: data, quantity: 1 }],
-          totalItems: 1,
-          totalPrice: data.price,
+          cart: {
+            items: [{ productId: data, quantity: 1 }],
+            totalItems: 1,
+            totalPrice: data.price,
+          },
         };
         localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success('product added to cart');
@@ -128,34 +131,29 @@ export class CartService {
     }
   }
 
-
-
-
-
-
   cartUpdate(data: any, quantity: number): void {
     if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
       let cart = localStorage.getItem('cart');
       // console.log(cart);
-      
+
       if (cart) {
         let localCart = JSON.parse(cart);
         // console.log(data);
-        let cartItemIndex = localCart.items.findIndex(
+        let cartItemIndex = localCart.cart.items.findIndex(
           (x: any) => x.productId._id == data._id
         );
         // console.log(cartItemIndex);
-        
+
         // index product in items
-        let product = localCart.items[cartItemIndex];
+        let product = localCart.cart.items[cartItemIndex];
         // console.log(product);
-        
+
         //  if user removed the item
 
         if (quantity < 1) {
-          localCart.totalPrice -= product.quantity * product.productId.price
-          localCart.totalItems -= product.quantity;
-          localCart.items.splice(cartItemIndex, 1)
+          localCart.cart.totalPrice -= product.quantity * product.productId.price;
+          localCart.cart.totalItems -= product.quantity;
+          localCart.cart.items.splice(cartItemIndex, 1);
           this.cartData = localCart;
           localStorage.setItem('cart', JSON.stringify(localCart));
           return this.cartDataSubject.next(localCart);
@@ -164,40 +162,39 @@ export class CartService {
         else if (quantity > product.quantity) {
           // console.log(product,quantity);
           product.quantity += 1;
-          localCart.totalItems += 1;
-          localCart.totalPrice += product.productId.price;
+          localCart.cart.totalItems += 1;
+          localCart.cart.totalPrice += product.productId.price;
           this.cartData = localCart;
           // console.log(this.cartData, localCart
           // );
-          
+
           localStorage.setItem('cart', JSON.stringify(localCart));
           return this.cartDataSubject.next(localCart);
         }
         //  if user decrease quantity
         else if (quantity < product.quantity) {
           product.quantity -= 1;
-          localCart.totalItems -= 1;
-          localCart.totalPrice -= product.productId.price;
+          localCart.cart.totalItems -= 1;
+          localCart.cart.totalPrice -= product.productId.price;
           this.cartData = localCart;
-          localStorage.setItem('cart', JSON.stringify(localCart));
-          return this.cartDataSubject.next(localCart);
+          // console.log(this.cartData);
+
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
+          return this.cartDataSubject.next(this.cartData);
         }
       }
     }
-    //  if user logged in 
+    //  if user logged in
     else {
-      this.http.put(this.url + '/cart', { productId: data, quantity }).subscribe(
-        (response: any) => {
+      this.http
+        .put(this.url + '/cart', { productId: data, quantity })
+        .subscribe((response: any) => {
           this.cartData = response;
           this.cartDataSubject.next(this.cartData);
           this.toastr.success(response.message);
           localStorage.setItem('cart', JSON.stringify(this.cartData));
-        }
-      );
+        });
     }
-
-
-
   }
 }
 
