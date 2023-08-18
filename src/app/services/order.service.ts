@@ -17,9 +17,7 @@ export class OrderService {
   getOrderData(): Observable<any> {
     return this.orderDataSubject.asObservable();
   }
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getUserOrder() {
     return this.http.get(this.url + '/order');
@@ -29,8 +27,14 @@ export class OrderService {
     return this.http.get(this.url + '/order/' + orderId);
   }
 
-  placeOrder(form: any , order:any) {
-    return this.http.post(this.url + '/order',  {form , order});
+
+  trackOrder(orderId: string) {
+    return this.http.get(`${this.url}/track/${orderId}`);
+  }
+
+  
+  placeOrder(form: any, order: any) {
+    return this.http.post(this.url + '/order', { form, order });
   }
 
   cancelOrder(orderId: string) {
@@ -40,11 +44,4 @@ export class OrderService {
   cancelProductInOrder(orderId: string, productId: string) {
     return this.http.put(this.url + '/order/' + orderId, { productId });
   }
-
-
-
- 
-
-
-
 }

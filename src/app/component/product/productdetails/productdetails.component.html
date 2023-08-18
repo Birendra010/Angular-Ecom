@@ -39,7 +39,7 @@
         </div>
 
         
-         <button class="btn btn-primary" [disabled]="loading" (click)="addToCart(product)" [disabled]="product.stock ==0">Add to Cart <span *ngIf="loading"
+         <button class="btn btn-primary" [disabled]="loading || product.stock == 0" (click)="addToCart(product)" >Add to Cart <span *ngIf="loading"
             class="spinner-border spinner-border-sm " aria-hidden="true"></span> <i *ngIf="!loading"
             class="bi bi-cart"></i></button> 
              

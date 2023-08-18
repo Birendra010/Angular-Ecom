@@ -17,6 +17,7 @@ import { OrderdetailsComponent } from './component/order/orderdetails/orderdetai
 import { FailedComponent } from './component/payment/failed/failed.component';
 import { SuccessComponent } from './component/payment/success/success.component';
 import { StripeComponent } from './component/payment/stripe/stripe.component';
+import { TrackOrderComponent } from './component/track-order/track-order.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
@@ -31,7 +32,12 @@ const routes: Routes = [
   { component: CartComponent, path: 'cart' },
   { component: CheckoutComponent, path: 'checkout' },
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
-  {component: OrderdetailsComponent,path: 'order/:orderId',canActivate: [AuthGuard],},
+  {
+    component: OrderdetailsComponent,
+    path: 'order/:orderId',
+    canActivate: [AuthGuard],
+  },
+  { component: TrackOrderComponent, path: 'track' },
   { component: ResetPasswordComponent, path: 'forgotPassword' },
   { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
   { path: '**', component: PageNotFoundComponent },

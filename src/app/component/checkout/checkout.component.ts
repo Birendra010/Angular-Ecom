@@ -47,7 +47,7 @@ export class CheckoutComponent {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     // bname: new FormControl('', [Validators.required, Validators.minLength(3)]),
 
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.email]),
     phone: new FormControl('', [
       Validators.required,
       Validators.minLength(10),

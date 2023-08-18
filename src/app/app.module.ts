@@ -28,6 +28,7 @@ import { FailedComponent } from './component/payment/failed/failed.component';
 import { SuccessComponent } from './component/payment/success/success.component';
 // import { PaymentPageComponent } from './component/payment/payment-page/payment-page.component';
 import { StripeComponent } from './component/payment/stripe/stripe.component';
+import { TrackOrderComponent } from './component/track-order/track-order.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,8 @@ import { StripeComponent } from './component/payment/stripe/stripe.component';
     OrderdetailsComponent,
     FailedComponent,
     SuccessComponent,
-    // PaymentPageComponent,
     StripeComponent,
+    TrackOrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,6 @@ import { StripeComponent } from './component/payment/stripe/stripe.component';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    // NgxStripeModule.forRoot('pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'),
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-center',

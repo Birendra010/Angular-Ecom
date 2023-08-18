@@ -44,24 +44,25 @@ export class UserService {
     return this.http.post(this.url + '/login', data).subscribe((res: any) => {
       localStorage.setItem('token', res.token);
       this.router.navigate(['/']);
-       this.cartService.saveLocalCartData();
-      this.loggerService.isLogged = true;
+      this.cartService.saveLocalCartData();
       this.cartService.getUserCart();
+      this.loggerService.isLogged = true;
       this.toastr.success(res.message);
     });
   }
 
   logout() {
-    this.loading = true;
+    // this.loading = true;
+
     localStorage.clear();
     this.cartService.cartData = ' ';
     this.loggerService.isLogged = false;
     // this.toastr.success('logout seccessfully');
-    setTimeout(() => {
-      // this.loading = false;
-    },3000)
+    // setTimeout(() => {
+    //   this.loading = false;
+    // },1000)
     this.router.navigate(['/']);
-    this.loading = false 
+    // this.loading = false 
   }
 
   forgotPassword(email: any) {

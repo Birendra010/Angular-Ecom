@@ -18,8 +18,6 @@ export class TokenInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>,next: HttpHandler
   ): Observable<HttpEvent<any>> {
       const token =
-          // this.userService.token;
-        // console.log(this.userService.token);
         localStorage.getItem('token');
     if (token) {
       request = request.clone({
@@ -30,13 +28,14 @@ export class TokenInterceptorService implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((err) => {
-        // console.log(err);
         if (err.status === 500) {
           this.userService.logout();
         }
-        if (err.status === 409 || err.status === 400  || err.status ===404) {
-          this.toastr.error(err.error.message)
-          
+        if (err.status === 409 || err.status === 401 ) {
+          this.toastr.error(err.error.message) 
+          this.userService.logout()
+        } else if (err.status === 400 || err.status === 404) {
+          this.toastr.error(err.error.message); 
           
         }
         const error = err.message||  err.error.message || err.statusText;

@@ -38,7 +38,7 @@ export class CartComponent {
 
       this.cartService.getCartData().subscribe((data: any) => {
 
-        if (data) {
+        if (data.cart) {
           this.items = data.cart.items;
 
           this.cartDetails = data;
@@ -54,7 +54,7 @@ export class CartComponent {
   }
 
   cartUpdate(productId: string, quantity: number) {
-    // this.loading = true;
+    this.loading = true;
     this.cartService.cartUpdate(productId, quantity);
     this.cartService.getCartData().subscribe((data: any) => {
       if (data) {
@@ -65,8 +65,8 @@ export class CartComponent {
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
     
-    // setTimeout(() => {
-    //   this.loading = false;
-    // }, 2000);
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 }

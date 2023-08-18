@@ -1,12 +1,68 @@
-.summery{
-    min-width:16rem;  max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 45px;
+/* .summery{
+    min-width:16rem;  max-width: 25rem; height: max-content; padding: 3px; padding-left: 1rem; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 45px;
     text-align: start;
-}
+} */
 
-.box {
-  min-width: 65%; /* Adjust the width as needed */
+/* .box { */
+  /* margin: 1rem; */
+  /* max-width: 60%; */
+   /* Adjust the width as needed */
   /* padding: 20px;  */
   /* background-color: #f0f0f0;  */
   /* border-radius: 10px;  */
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+/* } */
+
+/* .cancelbtn {
+  max-width: 10rem;
+} */
+
+/* For small screens */
+@media (max-width: 576px) {
+  /* Center align loader */
+  .loader {
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Adjust card layout */
+  .card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Increase image size for better visibility on small screens */
+  .card-body img {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+
+/* For medium screens */
+@media (min-width: 577px) and (max-width: 992px) {
+  /* Adjust card layout */
+  .card-body {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+/* For large screens */
+@media (min-width: 993px) {
+  /* Adjust layout for the whole page */
+  .d-flex.flex-md-row.flex-column {
+    flex-direction: row;
+  }
+
+  /* Adjust layout for the order details section */
+  .box {
+    width: 60%;
+  }
+
+  /* Adjust layout for the summary section */
+  .summery {
+    width: 30%;
+    padding-left: 2rem;
+    margin-top: 2rem;
+  }
 }

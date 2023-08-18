@@ -1,10 +1,12 @@
 
-      
-
-
     <div class="payment-container">
         <div class="icon">&#x2714;</div>
         <h2>Payment Successful</h2>
         <p>Your payment has been successfully processed.</p>
-        <button class="back-button" routerLink="/order">My Orders</button>
+        <button *ngIf="loggedIn" class="btn btn-primary" routerLink="/order">My Orders</button>
+        <div *ngIf="!loggedIn && orderId ">
+            <span>Your orderId  is </span>
+            <span>{{orderId}}</span>
+            <button class="btn btn-primary " style="margin-left: 2rem;" routerLink="/track"> Track</button>
+        </div>
     </div>

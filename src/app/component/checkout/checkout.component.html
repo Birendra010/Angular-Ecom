@@ -3,7 +3,7 @@
     <div class="d-flex flex-column justify-content-between ms-2" style="cursor: pointer;">
       <a routerLink="/login" style="color:blue; margin-left: 7rem; font-size: large; text-decoration: none;" *ngIf="!isLogged">~Already
         account</a>
-      <h1 class="ps-5 pt-1">Shipping address</h1>
+      <h3 class="ps-5 pt-1">Continue as a Guest</h3>
     </div>
 
     <form class="row g-2 p-4" [formGroup]="form">
@@ -11,15 +11,19 @@
         <label for="name" class="form-label" >name</label>
         <input type="name" class="form-control" id="name" formControlName="name">
         <div *ngIf="name && name.touched" class="input-error text-danger">
-          <span *ngIf="name.errors?.['required'] ">Enter name</span>
+          <!-- <span *ngIf="name.errors?.['required'] ">Enter name</span> -->
           <span *ngIf="name?.errors?.['minlength'] ">name length should be min 3 letter</span>
         </div>
       </div>
-      <div class="col-sm-6"  >
+
+
+
+      
+      <div class="col-sm-6" *ngIf="!isLogged"  >
         <label for="email" class="form-label">email</label>
         <input type="email" class="form-control" id="email" formControlName="email">
         <div *ngIf=" email  && email.touched" class="input-error  text-danger">
-          <span *ngIf="email .errors?.['required'] ">Enter email </span>
+          <!-- <span *ngIf="email .errors?.['required'] ">Enter email </span> -->
           <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
         </div>
       </div>
@@ -105,6 +109,6 @@
       <span>Total : </span>
       <span> {{cartDetails.totalPrice}}$</span>
     </div>
-    <app-stripe [order]="cartDetails" [form]="form.value"></app-stripe>
+    <app-stripe [order]="cartDetails" [form]="form.value" [formStatus] = " form.status"></app-stripe>
   </div>
 </div>

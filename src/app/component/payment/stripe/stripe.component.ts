@@ -17,34 +17,35 @@ export class StripeComponent {
   order!: any;
   @Input()
   form!: any;
-  
+  @Input()
+  formStatus!:any;
+
   // loading : boolean = false
 
-  constructor(private http: HttpClient , private paymentService : PaymentService, private orderService  :OrderService) {}
+  constructor(
+    private http: HttpClient,
+    private paymentService: PaymentService,
+    private orderService: OrderService
+  ) {}
 
   onPayment() {
     // this.loading = true
     this.orderService.placeOrder(this.form, this.order).subscribe((res) => {
-      console.log(res);
-      
-    })
-    this.paymentService.payment(this.order , this.form).subscribe(async (res:any) => {
-      let stripe = await loadStripe(
-          'pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'
-      );
-        localStorage.setItem('paymentResponse', JSON.stringify(res));
+      this.paymentService
+        .payment(this.order, this.form)
+        .subscribe(async (res: any) => {
+          let stripe = await loadStripe(
+            'pk_test_51NdRYtSD97XjtBD2IWl7hl0sU9kclXGtqUJbkK84lsEICqNTkwrCVmXNVGGo6OdFl0rBVO1S2aUL3xXGSlN6JbA100JYrPPEEs'
+          );
+          localStorage.setItem('paymentResponse', JSON.stringify(res));
 
-       stripe?.redirectToCheckout({
-          sessionId: res.id,
-          
+          stripe?.redirectToCheckout({
+            sessionId: res.id,
+          });
+          // this.loading = false
         });
-    })
-    
-       
-         
-
-       
-      
+    });
+   
   }
 }
 
