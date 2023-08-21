@@ -30,14 +30,16 @@ align-items: center;">
 
                     <span class="badge "
                         style="width: 6rem; height: 2rem; margin-top: 2px; font-size: medium; padding-top: 5px; cursor: pointer;"
-                        [class.bg-warning]="orders.status ==='pending'"
-                        [class.bg-success]="orders.status ==='delivered'">
+                        [class.bg-warning]="orders.status ==='delivered'"
+                        [class.bg-success]="orders.status ==='completed'"
+                        [class.bg-danger]="orders.status ==='canceled'">
+
                         {{orders.status}}
                     </span>
 
 
 
-                    <button class="mt-2 btn btn-sm btn-primary" *ngIf="orders.status==='pending'" title="View Details"
+                    <button class="mt-2 btn btn-sm btn-primary"  title="View Details"
                         [routerLink]="['/order',orders._id]">View Details</button>
                 </div>
             </div>

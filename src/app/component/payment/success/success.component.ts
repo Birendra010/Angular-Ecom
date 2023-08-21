@@ -25,57 +25,21 @@ export class SuccessComponent {
       .post(this.url + '/paymentStatus', {
         id: JSON.parse(localStorage.getItem('paymentResponse') || '').id,
       })
-      .subscribe((res:any) => {
-        this.cartService.cartData = []
+      .subscribe((res: any) => {
+        this.cartService.cartData = [];
         if (res.paymentIntent == 'succeeded') {
           this.orderId = res.orderId;
         }
-        localStorage.setItem('paymentIntent', JSON.stringify(res.paymentIntent));
+        localStorage.setItem(
+          'paymentIntent',
+          JSON.stringify(res.paymentIntent)
+        );
         // this.count = 0
         localStorage.removeItem('cart');
       });
   }
 
 }
-
-
-
-
-// export class PaymentsuccessComponent {
-//   constructor(
-//     private http: HttpClient,
-//     private cartService: CartService,
-//     private loggerService: LoggerService
-//   ) {}
-//   url: string = environment.API_URL;
-//   orderId: string = '';
-//   loggedIn: boolean = false;
-
-//   ngOnInit(): void {
-//     this.check();
-//     this.loggedIn = this.loggerService.isLoggedin;
-//   }
-//   check() {
-//     this.http
-//       .post(this.url + '/payment-status', {
-//         id: JSON.parse(localStorage.getItem('paymentResponse') || '').id,
-//       })
-//       .subscribe((res: any) => {
-//         this.cartService.cartData = [];
-//         if (res.paymentIntent == 'succeeded') {
-//           this.orderId = res.orderId;
-//         }
-//         localStorage.setItem(
-//           'paymentIntent',
-//           JSON.stringify(res.paymentIntent)
-//         );
-//         localStorage.removeItem('cart');
-//       });
-//   }
-// }
-
-
-
 
 
 

@@ -26,7 +26,6 @@ import { OrderdetailsComponent } from './component/order/orderdetails/orderdetai
 import { TokenInterceptorService } from './TokenInterceptorService';
 import { FailedComponent } from './component/payment/failed/failed.component';
 import { SuccessComponent } from './component/payment/success/success.component';
-// import { PaymentPageComponent } from './component/payment/payment-page/payment-page.component';
 import { StripeComponent } from './component/payment/stripe/stripe.component';
 import { TrackOrderComponent } from './component/track-order/track-order.component';
 

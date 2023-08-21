@@ -7,7 +7,7 @@
 <h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled  </h1>
 
 
-<div *ngIf="orderDetail && orderDetail.status !== 'canceled'"
+<div *ngIf="orderDetail "
     class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
     <div *ngIf="orderDetail" class="box">
   
@@ -24,14 +24,15 @@
                         <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} * {{item.quantity }} </span>
                         
                         
-                        <button style="min-width: 6rem;" class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
+                        <button style="min-width: 6rem;" *ngIf="item.status===false && orderDetail.status!== 'canceled'" class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
                             Item</button>
+                            <span class="badge text-bg-danger " *ngIf="item.status === true " >{{item.status}}</span>
                     </div>
 
                 </div>
             </div>
         </div>
-        <button  class="cancel btn btn-primary mx-4 " *ngIf="orderDetail && orderDetail.totalItems >= 1 "
+        <button  class="cancel btn btn-primary mx-4 " *ngIf="orderDetail && orderDetail.status!=='canceled' && orderDetail.totalItems >= 1 "
             (click)="orderCancel(orderDetail._id)">Cancel Order</button>
         </div>
         <div class="summery card" style="padding-right: 6rem;" *ngIf="orderDetail.items && orderDetail.totalItems >= 1 ">

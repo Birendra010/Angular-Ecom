@@ -16,17 +16,38 @@
         <!-- <li class="nav-item ">
           <a class="nav-link active" routerLink="/track">Track-Order </a>
         </li> -->
+
+
+
+
+
       </ul>
+
+      <div class="nav-search" style="height: 2rem; width: 13.5rem;">
+        <input type="text" #searchInput (keyup)="searchProduct($event)" (blur)="hideSearch()"
+          placeholder="Search for products">
+        <ul class="suggested-search "
+          style="max-height: 10.5rem; z-index: 100;  background-color: aqua; overflow-y: hidden;z-index: 100; position: relative;   "
+          *ngIf="searchResult">
+          <li *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item._id)">
+            <a>{{item.title}}</a>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+
+
       <div class="dropdown">
         <i class="bi bi-person-circle  ">
           <div class="dropdown-content ">
-            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn"
-              routerLink="/login">
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn" routerLink="/login">
               Login
             </button>
 
-            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn"
-              routerLink="/signup">
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="!loggedIn" routerLink="/signup">
               Signup
             </button>
 
@@ -40,18 +61,14 @@
           </div>
         </i>
       </div>
-      <div >
+      <div>
         <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 15px; right: -10px">
           {{count}} </span>
-   <span style="margin-right: 10px;"><i class="bi bi-cart " title="Cart" style="cursor: pointer   " routerLink="/cart">
-  
-  </i></span>
+        <span style="margin-right: 10px;"><i class="bi bi-cart " title="Cart" style="cursor: pointer   "
+            routerLink="/cart">
+
+          </i></span>
       </div>
     </div>
   </div>
 </nav>
-
-<!-- <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search for products,brands and more" aria-label="Search">
-    <button class="btn btn-light" type="submit">Search</button>
-  </form> -->

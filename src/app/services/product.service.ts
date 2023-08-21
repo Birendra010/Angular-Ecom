@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../component/environment/environment';
+import { Product } from '../models/product';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -8,6 +10,13 @@ import { environment } from '../component/environment/environment';
 })
 export class ProductService {
   url: string = environment.API_URL;
+
+  private productSubject: BehaviorSubject<Product> =
+    new BehaviorSubject<Product>(<any>[]);
+
+  getProduct(): Observable<any> {
+    return this.productSubject.asObservable();
+  }
 
   constructor(private http: HttpClient) {}
   productList() {
@@ -23,6 +32,14 @@ export class ProductService {
   }
 
   getProductById(id: string) {
-    return this.http.get(this.url + '/getProductById/' + id);
+    this.http.get(this.url + '/getProductById/' + id).subscribe((res: any) => {
+       return this.productSubject.next(res)
+     })
+  }
+
+  searchProduct(query: string) {
+    return this.http.get<Product[]>(
+      `${this.url}/products/search?searchQuery=${query}`
+    );
   }
 }

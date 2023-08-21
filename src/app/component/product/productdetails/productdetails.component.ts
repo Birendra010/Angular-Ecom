@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -20,22 +20,44 @@ export class ProductdetailsComponent implements OnInit {
     private router: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdr:ChangeDetectorRef
   ) {
 
   }
 
-  ngOnInit(): void {
 
 
 
-    let paramId = this.router.snapshot.paramMap.get('id');
-    if (paramId) {
-      this.productService.getProductById(paramId).subscribe((res: any) => {
-        this.product = res.product;
-      });
-    }
+
+    // let paramId = this.router.snapshot.paramMap.get('id');
+    // if (paramId) {
+    //   this.productService.getProductById(paramId).subscribe((res: any) => {
+    //     this.product = res.product;
+    //   });
+    // }
+
+
+  ngOnInit(){
+    // this.token = localStorage.getItem('token') || '';
+      this.router.params.subscribe((params) => {
+        const title = params['id'];
+        this.productService.getProductById(title)
+        this.productService.getProduct().subscribe((res) => {
+          this.product = res.product;
+        });
+      })
+    this.cdr.detectChanges();
   }
+
+
+
+
+
+
+
+
+  
   showimage(url: string) {
     this.image = url;
   }

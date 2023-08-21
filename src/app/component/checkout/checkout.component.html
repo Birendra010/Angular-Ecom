@@ -3,7 +3,8 @@
     <div class="d-flex flex-column justify-content-between ms-2" style="cursor: pointer;">
       <a routerLink="/login" style="color:blue; margin-left: 7rem; font-size: large; text-decoration: none;" *ngIf="!isLogged">~Already
         account</a>
-      <h3 class="ps-5 pt-1">Continue as a Guest</h3>
+      <h3 *ngIf="!isLogged" class="ps-5 pt-1">Continue as a Guest</h3>
+      <h3 class="ps-5 pt-1">Shipping Details</h3>
     </div>
 
     <form class="row g-2 p-4" [formGroup]="form">
