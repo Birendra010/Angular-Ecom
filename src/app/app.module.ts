@@ -28,6 +28,8 @@ import { FailedComponent } from './component/payment/failed/failed.component';
 import { SuccessComponent } from './component/payment/success/success.component';
 import { StripeComponent } from './component/payment/stripe/stripe.component';
 import { TrackOrderComponent } from './component/track-order/track-order.component';
+import { AboutPageComponent } from './component/about-page/about-page.component';
+import { SearchProductComponent } from './component/search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { TrackOrderComponent } from './component/track-order/track-order.compone
     SuccessComponent,
     StripeComponent,
     TrackOrderComponent,
+    AboutPageComponent,
+    SearchProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>
+<!-- {{orderDetail | json}} -->
 
 <h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled  </h1>
 
@@ -24,7 +25,7 @@
                         <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} * {{item.quantity }} </span>
                         
                         
-                        <button style="min-width: 6rem;" *ngIf="item.status===false && orderDetail.status!== 'canceled'" class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
+                        <button style="min-width: 6rem;" *ngIf="item.canceled ===false && orderDetail.status!== 'canceled'" class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
                             Item</button>
                             <span class="badge text-bg-danger " *ngIf="item.status === true " >{{item.status}}</span>
                     </div>

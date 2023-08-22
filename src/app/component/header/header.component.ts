@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
@@ -21,7 +22,6 @@ export class HeaderComponent {
   ) {}
   loggedIn: boolean = false;
   count: number = 0;
-
   searchQuery: string = '';
   searchResult: undefined | Product[];
 
@@ -70,25 +70,28 @@ export class HeaderComponent {
   searchProduct(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
-     
+
       this.product.searchProduct(element.value).subscribe((result) => {
         // if (result.length > 10) {
         //   result.length = length;
         // }
 
         // console.log(result);
-        
+
         this.searchResult = result;
       });
     }
   }
+
+  search(query:String) {
+    this.router.navigate([`/products/search/${query}`]);
+  }
+
   hideSearch() {
     this.searchResult = undefined;
-    
   }
   redirectToDetails(id: string) {
     this.router.navigate(['/products/' + id]);
-    
   }
   submitSearch(val: string) {
     // console.warn(val);

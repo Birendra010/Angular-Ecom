@@ -8,7 +8,7 @@
     <h1 class="text-center mt-5"> No Order found </h1>
 </div>
 
-
+<!-- {{orders | json}} -->
 <h1 *ngIf="orders && orders.length > 0 " class="text-center">My orders</h1>
 <div class="d-flex flex-column  gap-2 p-3" style="max-width: 100% ;display: flex; justify-content: center;
 align-items: center;">
@@ -17,6 +17,7 @@ align-items: center;">
 
             <div class="card-body " class="p-2 d-flex flex-row gap-2">
                 <div class="d-flex flex-row gap-2 w-40">
+                    <!-- {{orders.items[0].productId}} -->
                     <img src="{{orders.items[0].productId.thumbnail}}" alt="" style="height: 5rem; width: 5rem;">
                     <div class="d-flex flex-column w-40 ">
                         <h5 class="card-title">{{orders.items[0].productId.title}}</h5>

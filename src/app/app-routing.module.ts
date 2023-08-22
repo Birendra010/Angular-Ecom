@@ -18,15 +18,21 @@ import { FailedComponent } from './component/payment/failed/failed.component';
 import { SuccessComponent } from './component/payment/success/success.component';
 import { StripeComponent } from './component/payment/stripe/stripe.component';
 import { TrackOrderComponent } from './component/track-order/track-order.component';
+import { AboutPageComponent } from './component/about-page/about-page.component';
+import { SearchProductComponent } from './component/search-product/search-product.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
+  { component: AboutPageComponent, path: 'about' },
+
   { component: SignupComponent, path: 'signup' },
   { component: StripeComponent, path: 'payments' },
   { component: FailedComponent, path: 'failed' },
   { component: SuccessComponent, path: 'success' },
   { component: LoginComponent, path: 'login' },
   { component: ProductComponent, path: 'products' },
+  { component: SearchProductComponent, path: 'products/search/:query' },
+
   { component: ProductdetailsComponent, path: 'products/:id' },
   { component: ContactUsComponent, path: 'contact' },
   { component: CartComponent, path: 'cart' },

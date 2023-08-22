@@ -20,7 +20,6 @@ export class ProductdetailsComponent implements OnInit {
     private router: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private toastr: ToastrService,
     private cdr:ChangeDetectorRef
   ) {
 
@@ -40,7 +39,8 @@ export class ProductdetailsComponent implements OnInit {
 
   ngOnInit(){
     // this.token = localStorage.getItem('token') || '';
-      this.router.params.subscribe((params) => {
+    this.router.params.subscribe((params) => {
+      this.image = '';
         const title = params['id'];
         this.productService.getProductById(title)
         this.productService.getProduct().subscribe((res) => {
@@ -49,14 +49,6 @@ export class ProductdetailsComponent implements OnInit {
       })
     this.cdr.detectChanges();
   }
-
-
-
-
-
-
-
-
   
   showimage(url: string) {
     this.image = url;

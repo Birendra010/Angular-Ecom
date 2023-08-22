@@ -1,0 +1,27 @@
+
+
+img{
+    height: 7rem; width:60%;
+}
+
+.card{
+    transition: all 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.bi{
+    color: blue;
+    
+}
+
+.fix-img{
+width: 96%;
+margin-left: auto;
+margin-right: auto;
+padding: 5px;
+
+
+}
