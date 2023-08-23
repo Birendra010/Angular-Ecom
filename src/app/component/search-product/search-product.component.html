@@ -1,7 +1,10 @@
 <div class="container-fluid fix-img">
 
+    <div *ngIf="products.length === 0" style="text-align: center; margin-top: 2rem;">
+        <h1  >Product not found</h1>
+    </div>
     <div class="row row-cols-2 row-cols-sm-6 mt-4 g-3  ">
-        <div class="col p-2 " *ngFor="let p of products" [routerLink]="['/products',p._id]">
+        <div class="col p-2 "   *ngFor="let p of products" [routerLink]="['/products',p._id]">
 
             <div class="card mx-auto p-1 shadow-lg  bg-white rounded ">
                 <img class="card-img-top  w-100" src="{{p.thumbnail}}">

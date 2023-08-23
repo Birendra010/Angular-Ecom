@@ -44,10 +44,11 @@ export class CheckoutComponent {
     }
   }
   form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    // bname: new FormControl('', [Validators.required, Validators.minLength(3)]),
-
+    bname: new FormControl('', [Validators.minLength(3)]),
     email: new FormControl('', [Validators.email]),
+    password: new FormControl('', [Validators.minLength(6)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+
     phone: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
@@ -64,14 +65,17 @@ export class CheckoutComponent {
     ]),
   });
 
-  // get bname() {
-  //   return this.form.get('bname');
-  // }
-  get name() {
+  get bname() {
     return this.form.get('bname');
   }
   get email() {
     return this.form.get('email');
+  }
+  get password() {
+    return this.form.get('password');
+  }
+  get name() {
+    return this.form.get('name');
   }
   get phone() {
     return this.form.get('phone');

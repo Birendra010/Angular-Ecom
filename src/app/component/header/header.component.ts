@@ -27,16 +27,20 @@ export class HeaderComponent {
 
   ngOnInit() {
     let cart = localStorage.getItem('cart');
+    // console.log(cart);
+    
     if (cart) {
       let items = JSON.parse(cart);
-
       this.count = 0;
+
       if (items) {
         items.cart.items.forEach((x: any) => {
           return (this.count += x.quantity);
         });
       }
+      // console.log(items);
     }
+    
     this.cartService.getCartData().subscribe((data: any) => {
       this.count = 0;
       if (data.cart) {
@@ -88,6 +92,7 @@ export class HeaderComponent {
   }
 
   hideSearch() {
+    
     this.searchResult = undefined;
   }
   redirectToDetails(id: string) {

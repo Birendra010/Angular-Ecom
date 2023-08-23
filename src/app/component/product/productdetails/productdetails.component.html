@@ -2,23 +2,10 @@
   <div *ngIf="product" class="d-flex flex-column flex-md-row gap-5">
     <div>
       <div style="height: 350px; width: 400px; ">
-        <img
-          src="{{ image || product.thumbnail }}"
-          alt=""
-          style="height: 100% ; display: flex; "
-          class="img-fluid"
-        />
+        <img src="{{ image || product.thumbnail }}" alt="" style="height: 100% ; display: flex; " class="img-fluid" />
       </div>
-      <div
-        class="d-flex flex-row mt-2 "
-        style="width: 350px;; height: 8rem; overflow-x: scroll; cursor: pointer; "
-      >
-        <img
-          src="{{ url }}"
-          alt=""
-          *ngFor="let url of product.images"
-          (click)="showimage(url)"
-        />
+      <div class="d-flex flex-row mt-2 " style="width: 350px;; height: 8rem; overflow-x: scroll; cursor: pointer; ">
+        <img src="{{ url }}" alt="" *ngFor="let url of product.images" (click)="showimage(url)" />
       </div>
     </div>
 
@@ -38,12 +25,22 @@
           <span style="color: red; text-align: center;">out of stock</span>
         </div>
 
-        
-         <button class="btn btn-primary" [disabled]="loading || product.stock == 0" (click)="addToCart(product)" >Add to Cart <span *ngIf="loading"
-            class="spinner-border spinner-border-sm " aria-hidden="true"></span> <i *ngIf="!loading"
-            class="bi bi-cart"></i></button> 
-             
+
+        <div class="d-flex flex-row gap-4">
+
+
+          <button class="btn btn-primary" [disabled]="loading || product.stock == 0" (click)="addToCart(product)">Add to
+            Cart
+            <span *ngIf="loading" class="spinner-border spinner-border-sm " aria-hidden="true"></span> <i
+              *ngIf="!loading" class="bi bi-cart"></i></button>
+
+
+          <button class="btn btn-warning" (click)="addToWishlist(product._id)">Add to Wishlist
+            <i class="bi bi-star"></i></button>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+<!-- <i class="bi bi-"></i> -->

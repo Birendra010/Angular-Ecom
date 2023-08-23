@@ -1,31 +1,51 @@
 <div class="d-flex p-3 flex-column flex-md-row align-items-center">
   <div>
     <div class="d-flex flex-column justify-content-between ms-2" style="cursor: pointer;">
-      <a routerLink="/login" style="color:blue; margin-left: 7rem; font-size: large; text-decoration: none;" *ngIf="!isLogged">~Already
+      <a routerLink="/login" style="color:blue; margin-left: 7rem; font-size: large; text-decoration: none;"
+        *ngIf="!isLogged">~Already
         account</a>
       <h3 *ngIf="!isLogged" class="ps-5 pt-1">Continue as a Guest</h3>
-      <h3 class="ps-5 pt-1 " *ngIf="isLogged">Shipping Details</h3>
+      <!-- <h3 class="ps-5 pt-1 " *ngIf="isLogged">Shipping Details</h3> -->
     </div>
 
     <form class="row g-2 p-4" [formGroup]="form">
-      <div class="col-sm-6">
-        <label for="name" class="form-label" >name</label>
-        <input type="name" class="form-control" id="name" formControlName="name">
-        <div *ngIf="name && name.touched" class="input-error text-danger">
-          <!-- <span *ngIf="name.errors?.['required'] ">Enter name</span> -->
-          <span *ngIf="name?.errors?.['minlength'] ">name length should be min 3 letter</span>
+      <div class="col-sm-6" *ngIf="!isLogged">
+        <label for="bname" class="form-label">name</label>
+        <input type="bname" class="form-control" id="bname" formControlName="bname">
+        <div *ngIf="bname && bname.touched" class="input-error text-danger">
+          <span *ngIf="bname.errors?.['required'] ">Enter name</span>
+          <span *ngIf="bname?.errors?.['minlength'] ">name length should be min 3 letter</span>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="!isLogged">
+        <label for="email" class="form-label">email</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+        <div *ngIf=" email  && email.touched" class="input-error  text-danger">
+          <span *ngIf="email .errors?.['required'] ">Enter email </span>
+          <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
         </div>
       </div>
 
 
+      <div class="col-sm-6" *ngIf="!isLogged">
+        <label for="password" class="form-label"> password </label>
+        <input type="password" class="form-control" formControlName="password">
+        <div *ngIf=" password  && password.touched" class="input-error  text-danger">
+          <span *ngIf="password .errors?.['required'] ">Enter password </span>
+          <span *ngIf="password.errors?.['minlength']  ">Enter valid password </span>
+        </div>
+      </div>
 
-      
-      <div class="col-sm-6" *ngIf="!isLogged"  >
-        <label for="email" class="form-label">email</label>
-        <input type="email" class="form-control" id="email" formControlName="email">
-        <div *ngIf=" email  && email.touched" class="input-error  text-danger">
-          <!-- <span *ngIf="email .errors?.['required'] ">Enter email </span> -->
-          <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
+      <div class="row">
+        <h3 class="pt-1">Shipping address</h3>
+
+      <div class="col-sm-6">
+        <label for="name" class="form-label">name</label>
+        <input type="name" class="form-control" id="name" formControlName="name">
+        <div *ngIf="name && name.touched" class="input-error text-danger">
+          <span *ngIf="name.errors?.['required'] ">Enter name</span>
+          <span *ngIf="name?.errors?.['minlength'] ">name length should be min 3 letter</span>
         </div>
       </div>
 
@@ -85,6 +105,7 @@
           <span *ngIf="pincode?.errors?.['minlength'] ">Enter valid pincode </span>
         </div>
       </div>
+      </div>
     </form>
 
   </div>
@@ -110,6 +131,6 @@
       <span>Total : </span>
       <span> {{cartDetails.totalPrice}}$</span>
     </div>
-    <app-stripe [order]="cartDetails" [form]="form.value" [formStatus] = " form.status"></app-stripe>
+    <app-stripe [order]="cartDetails" [form]="form.value" [formStatus]=" form.status"></app-stripe>
   </div>
 </div>

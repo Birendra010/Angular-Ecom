@@ -35,9 +35,7 @@ export class CartComponent {
     } else if (!cart && !localStorage.getItem('token')) {
     } else {
       this.cartService.getUserCart();
-
       this.cartService.getCartData().subscribe((data: any) => {
-
         if (data.cart) {
           this.items = data.cart.items;
 

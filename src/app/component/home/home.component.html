@@ -10,26 +10,26 @@
       </div>
 
       <div class="carousel-caption">
-        <h3>{{ item.brand }}</h3>
+        <h3 style="color: blue;"> {{ item.brand }}</h3>
         <p>{{ item.description }}</p>
       </div>
     </ng-template>
   </ngb-carousel>
 
   <div class="container-fluid  fix-img">
-    <div class="row row-cols-2 row-cols-sm-6 mt-4 g-3" >
+    <div class="row row-cols-2 row-cols-sm-5 mt-4 g-3" >
       <div class="col p-2" *ngFor="let p of HomeProducts">
         <div
           class="card mx-auto shadow-lg p-2 w-100 bg-white rounded"
           (click)="productPage(p._id)"
         >
           <img class="card-img-top" src="{{ p.thumbnail }}" />
-          <span  class="text-truncate">{{ p.brand }}</span>
+          <span  class="text-truncate" style="color: rgb(18, 18, 141);">{{ p.brand }}</span>
           <span class="text-truncate">{{ p.description }}</span>
 
           <div class=" d-flex flex-row justify-content-between">
-            <span>${{ p.price }}</span>
-            <span class="bi bi-star">{{ p.rating }}</span>
+            <span style="color: rgb(32, 32, 125);">${{ p.price }}</span>
+            <span class="bi bi-star ">{{ p.rating }}</span>
           </div>
         </div>
       </div>

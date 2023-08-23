@@ -2,7 +2,8 @@
 
   <div class="container-fluid">
     <div class="collapse navbar-collapse d-flex flex-md-row" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-none d-sm-flex  flex-row" style="--bs-scroll-height: 100px">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-none d-sm-flex  flex-row"
+        style="--bs-scroll-height: 100px">
         <li class="nav-item">
           <button class="nav-link active" routerLink="/">Home</button>
         </li>
@@ -17,23 +18,53 @@
           <a class="nav-link active" routerLink="/about">About </a>
         </li>
       </ul>
-      
-      <div class="nav-search" style="height: 2rem; width: 16rem; margin-right: 3rem; ">
-        <input type="text" #searchInput (keyup)="searchProduct($event)"  (keyup.enter)="search(searchInput.value) "  (blur)="hideSearch() "
-          placeholder="Search for products" style="width: 100%; padding: 3px; outline-color:rgb(217, 217, 217);  ">
+
+      <div  style="height: 2rem; width: 18rem; margin-right: 3rem;  ">
+        <div class=" w-100" style="display: flex; height: 2rem; border: 1.5px solid; border-radius: 10px; ">
+          <input type="text" #searchInput (keyup)="searchProduct($event)" (keyup.enter)="search(searchInput.value) "
+          
+            (blur)="hideSearch() " placeholder="Search for products"
+            style="width: 100%; padding: 3px; outline:none; border: 0; border-radius: 10px;">
+          <span style="cursor: pointer; " (click)="search(searchInput.value)" ><i class="bi bi-search p-2 "></i></span>
+        </div>
+
+
         <ul class="suggested-search "
           style=" background-color: rgb(217, 217, 217); max-height: 15rem; z-index: 100;   overflow-y: hidden;z-index: 100; position: relative; cursor: pointer; "
-          class="card mx-auto shadow-lg p-2 w-100 text-truncate gap-1 "
-          *ngIf="searchResult" >
-          <li class="p-2" *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item._id)" >
-           <div class="item" >
-             <img src="{{item.thumbnail}}"  style="width: 2rem; height: 1.5rem; ">
-            <span style="margin-left: 8px;">{{item.title}}</span>
-           </div>
+          class="card mx-auto shadow-lg p-2 w-100 text-truncate gap-1 " *ngIf="searchResult">
+          <li class="p-2" *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item._id)">
+            <div class="item">
+              <img src="{{item.thumbnail}}" style="width: 2rem; height: 1.5rem; ">
+              <span style="margin-left: 8px;">{{item.title}}</span>
+            </div>
           </li>
         </ul>
 
       </div>
+
+
+
+
+
+      
+        <!-- <div style=" min-width: auto; max-width: 18rem; margin-right: 3rem;  ">
+          <div class="input-group w-100" >
+            <input type="text"  class="form-control  " style="background-color: rgb(244, 250, 255); border-color: rgb(179, 182, 184); ;"    placeholder="Search here ..." aria-label="search bar" #searchInput
+              (keyup.enter)="search(searchInput.value)" (keyup)="searchProduct($event)" (blur)="hideSearch()"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" style="background-color: rgb(219, 222, 224);"  id="basic-addon2" (click)="search(searchInput.value)"><i
+                class="bi bi-search"></i></span>
+          </div>
+          <ul class="suggested-search list-unstyled"
+            style="max-height: 11.4rem; z-index: 100;  background-color: rgb(217, 217, 217); overflow-y: hidden;z-index: 100; position: relative;   "
+            *ngIf="searchResult">
+            <li style="padding: 5px; display: flex; flex-direction: row; gap: 8px; cursor: pointer;"
+              *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item.title)">
+              <img src="{{item.thumbnail}}" alt="" style="height: 2.2rem; width: 2.2rem;  "> <span
+                class="text-truncate">{{item.title}}</span>
+            </li>
+          </ul>
+        </div> -->
 
       <div class="dropdown">
         <i class="bi bi-person-circle  ">
@@ -53,6 +84,9 @@
             <button class="nav-link active" style=" font-size: 17px" *ngIf="loggedIn" routerLink="/order">
               Orders
             </button>
+            <button class="nav-link active" style=" font-size: 17px" *ngIf="loggedIn" routerLink="/wishlist">
+              My wishlist
+            </button>
           </div>
         </i>
       </div>
@@ -67,4 +101,3 @@
     </div>
   </div>
 </nav>
-

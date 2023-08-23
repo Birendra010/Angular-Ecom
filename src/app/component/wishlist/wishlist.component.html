@@ -1,0 +1,36 @@
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+    <div class="spinner-border mx-auto" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf=" !products || products && products.length === 0">
+    <h1 class="text-center mt-3"> You have no wishlisted any Product </h1>
+</div>
+
+
+<h1 *ngIf="products && products.length > 0 " class="text-center">Wishlist</h1>
+<div class="d-flex flex-column  gap-2 p-3" style="max-width: 100%;   display: flex; justify-content: center;
+align-items: center;">
+    <div *ngIf="products">
+        <div class="card  px-3 mt-2  " *ngFor="let product of products">
+
+            <div class="card-body " class="p-2 d-flex flex-row gap-2">
+                <div class="d-flex flex-row gap-2  ">
+
+                    <img src="{{product.thumbnail}}" alt="" style="height: 5rem; width: 5rem;">
+                    <div class="d-flex flex-column ">
+                        <h6 class="card-title " style="color: blue;">{{product.title}}</h6>
+                        <span class="card-text text-truncate">{{product.description}}</span>
+                        <!-- <span class="card-price" style="color: mediumblue;">Price:${{product.price}}</span> -->
+
+
+                    </div>
+                </div>
+                <div class="ms-auto d-flex flex-column justify-content-between ">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

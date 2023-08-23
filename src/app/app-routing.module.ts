@@ -20,33 +20,35 @@ import { StripeComponent } from './component/payment/stripe/stripe.component';
 import { TrackOrderComponent } from './component/track-order/track-order.component';
 import { AboutPageComponent } from './component/about-page/about-page.component';
 import { SearchProductComponent } from './component/search-product/search-product.component';
+import { WishlistComponent } from './component/wishlist/wishlist.component';
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
   { component: AboutPageComponent, path: 'about' },
+  { component: ContactUsComponent, path: 'contact' },
 
   { component: SignupComponent, path: 'signup' },
+  { component: LoginComponent, path: 'login' },
+  { component: ResetPasswordComponent, path: 'forgotPassword' },
+  { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
+
   { component: StripeComponent, path: 'payments' },
   { component: FailedComponent, path: 'failed' },
   { component: SuccessComponent, path: 'success' },
-  { component: LoginComponent, path: 'login' },
+
   { component: ProductComponent, path: 'products' },
   { component: SearchProductComponent, path: 'products/search/:query' },
-
   { component: ProductdetailsComponent, path: 'products/:id' },
-  { component: ContactUsComponent, path: 'contact' },
+  
   { component: CartComponent, path: 'cart' },
   { component: CheckoutComponent, path: 'checkout' },
 
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
-  {
-    component: OrderdetailsComponent,
-    path: 'order/:orderId',
-    canActivate: [AuthGuard],
-  },
+  { component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard],},
   { component: TrackOrderComponent, path: 'track' },
-  { component: ResetPasswordComponent, path: 'forgotPassword' },
-  { component: UpdatePasswordComponent, path: 'resetPassword/:emailToken' },
+  
+  {component:WishlistComponent , path:'wishlist', canActivate:[AuthGuard]},
+
   { path: '**', component: PageNotFoundComponent },
 ];
 

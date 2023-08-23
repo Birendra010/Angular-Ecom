@@ -6,6 +6,7 @@
   background-color: #f3f3f3;
 } 
 
+
 .bi {
   font-size: x-large;
   padding-left: 20px;
@@ -22,7 +23,7 @@
   display: none;
   position: absolute;
   background-color: #f1e8e8;
-  height: 4rem;
+  max-height: 5rem;
   width: 6rem;
 
   left: -20px;

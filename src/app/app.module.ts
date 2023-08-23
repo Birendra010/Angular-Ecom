@@ -30,6 +30,7 @@ import { StripeComponent } from './component/payment/stripe/stripe.component';
 import { TrackOrderComponent } from './component/track-order/track-order.component';
 import { AboutPageComponent } from './component/about-page/about-page.component';
 import { SearchProductComponent } from './component/search-product/search-product.component';
+import { WishlistComponent } from './component/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SearchProductComponent } from './component/search-product/search-produc
     TrackOrderComponent,
     AboutPageComponent,
     SearchProductComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
