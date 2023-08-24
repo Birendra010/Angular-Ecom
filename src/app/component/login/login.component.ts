@@ -30,10 +30,8 @@ export class LoginComponent {
    this.userService.login(this.form.value)
   }
 
-
   login() {
-    this.userService.login(this.form.value)
-    
+    this.userService.login(this.form.value) 
 }
  
 }

@@ -94,18 +94,5 @@ export class CheckoutComponent {
     return this.form.get('pincode');
   }
 
-  // placeOrder() {
-  //   if (this.form.errors) {
-  //     return;
-  //   } else {
-  //     this.addClass();
-  //     this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
-  //       if (data) {
-  //         localStorage.removeItem('cart');
-  //         this.cartService.getUserCart();
-  //         this.router.navigate(['/order']);
-  //       }
-  //     });
-  //   }
-  // }
+  
 }

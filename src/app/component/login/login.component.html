@@ -5,7 +5,8 @@
 
         <div class="mb-3 border ">
             <label for="email" class="form-label">Email</label>
-            <input style="border: 0.5px solid rgb(224, 218, 218) " type="email" class="form-control " id="email" placeholder="Enter email" formControlName="email" />
+            <input style="border: 0.5px solid rgb(224, 218, 218) " type="email" class="form-control " id="email"
+                placeholder="Enter email" formControlName="email" />
             <div *ngIf="email && email.touched" class="text-danger">
                 <span *ngIf="email.errors?.['required'] ">Enter email</span>
                 <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
@@ -15,7 +16,8 @@
 
         <div class="mb-3 ">
             <label for="password" class="form-label">Password</label>
-            <input style="border: 0.5px solid rgb(224, 218, 218);" type="password" class="form-control" placeholder="Enter password" formControlName="password" />
+            <input style="border: 0.5px solid rgb(224, 218, 218);" type="password" class="form-control"
+                placeholder="Enter password" formControlName="password" />
             <div *ngIf="password && password.touched" class="text-danger">
                 <span *ngIf="password.errors?.['required'] ">Enter password</span>
                 <span *ngIf="password.errors?.['minlength']  ">
@@ -25,18 +27,19 @@
         </div>
 
 
-       <div class="d-flex flex-row justify-content-between">
-    <a style="color: blue;" routerLink="/forgotPassword">ForgotPassword?</a>
-    <a style="color: blue;" routerLink="/signup">Create Account?</a>
+        <div class="d-flex flex-row justify-content-between">
+            <a style="color: blue;" routerLink="/forgotPassword">ForgotPassword?</a>
+            <a style="color: blue;" routerLink="/signup">Create Account?</a>
 
 
-       </div>
-   
+        </div>
+
 
 
         <div class="  d-flex  gap-2">
-            <button type="submit" class="btn btn-primary " [disabled]="form.invalid" style="margin-left: 10rem; width: 5rem;">Login</button>
-       
+            <button type="submit" class="btn btn-primary " [disabled]="form.invalid"
+                style="margin-left: 10rem; width: 5rem;">Login</button>
+
         </div>
     </form>
 </div>

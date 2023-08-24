@@ -1,85 +1,50 @@
-
-
-<div
-  class="container mt-4   shadow-lg p-3  rounded " style="background-color: #f5e6e6;"
->
+<div class="container mt-4   shadow-lg p-3  rounded " style="background-color: #f5e6e6;">
   <h1 class="text-center  mb-2">Signup</h1>
 
   <form [formGroup]="form " (ngSubmit)="onSubmit()">
     <div class="mb-3 ">
       <label for="name" class="form-label">Name</label>
-      <input
-      style="border: 0.5px solid rgb(224, 218, 218) " 
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="name"
-        formControlName="name"
-      />
+      <input style="border: 0.5px solid rgb(224, 218, 218) " type="text" class="form-control" id="name"
+        placeholder="Your Name" formControlName="name" />
       <div *ngIf="name && name.touched" class="text-danger">
-        <span *ngIf="name.errors?.['required'] ">Enter name</span>
-        <span *ngIf="name.errors?.['minlength'] ">Enter valid name</span>
+        <span *ngIf="name.errors?.['required'] ">Enter Your Name</span>
+        <span *ngIf="name.errors?.['minlength'] ">Enter Your valid Name</span>
       </div>
     </div>
 
     <div class="mb-3 ">
       <label for="email" class="form-label">Email</label>
-      <input 
-      style="border: 0.5px solid rgb(224, 218, 218) " 
-        type="email"
-        class="form-control"
-        id="email"
-        placeholder="email"
-        formControlName="email"
-      />
+      <input style="border: 0.5px solid rgb(224, 218, 218) " type="email" class="form-control" id="email"
+        placeholder="Your Email" formControlName="email" />
       <div *ngIf="email && email.touched" class="text-danger">
         <span *ngIf="email.errors?.['required'] ">Enter email</span>
-        <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] "
-          >Enter valid Email address</span
-        >
+        <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
       </div>
     </div>
     <div class="mb-3 ">
       <label for="mobile" class="form-label">Mobile</label>
-      <input
-      style="border: 0.5px solid rgb(224, 218, 218) " 
-        type="mobile"
-        class="form-control"
-        id="mobile"
-        placeholder="mobile"
-        formControlName="mobile"
-      />
+      <input style="border: 0.5px solid rgb(224, 218, 218) " type="mobile" class="form-control" id="mobile"
+        placeholder="Mobile Number" formControlName="mobile" />
       <div *ngIf="mobile && mobile.touched" class="text-danger">
         <span *ngIf="mobile.errors?.['required'] ">Enter mobile</span>
-        <span *ngIf="mobile.errors?.['minlength'] || mobile.errors?.['mobile'] || mobile.errors?.['maxlength'] "
-          >Enter valid phone number</span
-        >
+        <span *ngIf="mobile.errors?.['minlength'] || mobile.errors?.['mobile'] || mobile.errors?.['maxlength'] ">Enter
+          valid phone number</span>
       </div>
     </div>
 
     <div class="mb-3 ">
       <label for="password" class="form-label">Password</label>
-      <input
-      style="border: 0.5px solid rgb(224, 218, 218) " 
-        type="password"
-        class="form-control"
-        placeholder="Password"
-        formControlName="password"
-      />
+      <input style="border: 0.5px solid rgb(224, 218, 218) " type="password" class="form-control"
+        placeholder="At least 6 characters" formControlName="password" />
       <div *ngIf="password && password.touched" class="text-danger">
         <span *ngIf="password.errors?.['required'] ">Enter password</span>
-        <span
-          *ngIf="password.errors?.['minlength'] || password.errors?.['pattern'] "
-        >
+        <span *ngIf="password.errors?.['minlength'] || password.errors?.['pattern'] ">
           Password length should be min 6
         </span>
       </div>
     </div>
     <div class="text-center">
-      <button
-        class="btn btn-primary mt-2"
-        [class.disabled]="form.status === 'INVALID'"
-      >
+      <button class="btn btn-primary mt-2" [class.disabled]="form.status === 'INVALID'">
         Signup
       </button>
     </div>

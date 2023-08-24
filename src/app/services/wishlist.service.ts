@@ -18,4 +18,8 @@ export class WishlistService {
   getWishlist(): Observable<any> {
     return this.http.get(this.url + '/wishlist');
   }
+
+  removeFromWishlist(productId: string): Observable<any> {
+    return this.http.put(`${this.url}/wishlist`, { productId });
+  }
 }

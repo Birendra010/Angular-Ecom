@@ -1,12 +1,8 @@
 <div>
-  <ngb-carousel *ngIf="popularProducts" >
+  <ngb-carousel *ngIf="popularProducts">
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
       <div class="picsum-img-wrapper" style="margin-top: 40px; ">
-        <img
-          class="product-header-img w-100"
-          src="{{ item.thumbnail }}"
-          alt="Random first slide"
-        />
+        <img class="product-header-img w-100" src="{{ item.thumbnail }}" alt="Random first slide" />
       </div>
 
       <div class="carousel-caption">
@@ -17,14 +13,11 @@
   </ngb-carousel>
 
   <div class="container-fluid  fix-img">
-    <div class="row row-cols-2 row-cols-sm-5 mt-4 g-3" >
+    <div class="row row-cols-2 row-cols-sm-5 mt-4 g-3">
       <div class="col p-2" *ngFor="let p of HomeProducts">
-        <div
-          class="card mx-auto shadow-lg p-2 w-100 bg-white rounded"
-          (click)="productPage(p._id)"
-        >
+        <div class="card mx-auto shadow-lg p-2 w-100 bg-white rounded" (click)="productPage(p._id)">
           <img class="card-img-top" src="{{ p.thumbnail }}" />
-          <span  class="text-truncate" style="color: rgb(18, 18, 141);">{{ p.brand }}</span>
+          <span class="text-truncate" style="color: rgb(18, 18, 141);">{{ p.brand }}</span>
           <span class="text-truncate">{{ p.description }}</span>
 
           <div class=" d-flex flex-row justify-content-between">
@@ -36,6 +29,3 @@
     </div>
   </div>
 </div>
-
-
-

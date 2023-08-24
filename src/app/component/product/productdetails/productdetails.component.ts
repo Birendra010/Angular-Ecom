@@ -55,7 +55,6 @@ export class ProductdetailsComponent implements OnInit {
     this.loading = true;
     this.cartService.addToCart(id);
     this.cartService.getCartData();
-    //  this.toastr.success("item added");
     setTimeout(() => {
       this.loading = false;
     }, 1000);

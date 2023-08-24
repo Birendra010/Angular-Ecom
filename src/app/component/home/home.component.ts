@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  productPage(id:string) {
-    this.router.navigate(['/products' ,id]);
+  productPage(id: string) {
+    this.router.navigate(['/products', id]);
   }
 }

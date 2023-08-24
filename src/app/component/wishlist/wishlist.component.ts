@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
 
 @Component({
@@ -9,8 +10,13 @@ import { WishlistService } from 'src/app/services/wishlist.service';
 })
 export class WishlistComponent {
   loading: boolean = false;
-  products!: Product[];
-  constructor(private wishlistService: WishlistService) {}
+  // products!: Product[];
+  // wishlistProducts: any[] = [];
+  products: any[] = [];
+  constructor(
+    private wishlistService: WishlistService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -20,5 +26,16 @@ export class WishlistComponent {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
+  }
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+    this.removeFromWishlist(product._id);
+  }
+
+  removeFromWishlist(productId: string) {
+    this.wishlistService.removeFromWishlist(productId).subscribe((res) => {
+      this.products = res.wishlist.products;
+    });
   }
 }

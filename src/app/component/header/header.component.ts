@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  
   constructor(
     private userService: UserService,
     private loggerService: LoggerService,
@@ -27,20 +28,16 @@ export class HeaderComponent {
 
   ngOnInit() {
     let cart = localStorage.getItem('cart');
-    // console.log(cart);
-    
     if (cart) {
       let items = JSON.parse(cart);
       this.count = 0;
-
       if (items) {
         items.cart.items.forEach((x: any) => {
           return (this.count += x.quantity);
         });
       }
-      // console.log(items);
     }
-    
+
     this.cartService.getCartData().subscribe((data: any) => {
       this.count = 0;
       if (data.cart) {
@@ -74,32 +71,26 @@ export class HeaderComponent {
   searchProduct(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
-
       this.product.searchProduct(element.value).subscribe((result) => {
-        // if (result.length > 10) {
-        //   result.length = length;
-        // }
-
-        // console.log(result);
-
         this.searchResult = result;
       });
     }
   }
 
-  search(query:String) {
+  search(query: String) {
     this.router.navigate([`/products/search/${query}`]);
   }
 
   hideSearch() {
-    
     this.searchResult = undefined;
   }
+
   redirectToDetails(id: string) {
     this.router.navigate(['/products/' + id]);
   }
+
   submitSearch(val: string) {
-    // console.warn(val);
     this.router.navigate([`search/${val}`]);
   }
+
 }

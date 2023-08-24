@@ -1,46 +1,40 @@
-.product-header-img{
-
-    object-fit: contain;
-    height: 500px;
-    width: 600px;
+.product-header-img {
+  object-fit: contain;
+  height: 500px;
+  width: 600px;
 }
 
-
-.carousel-caption{
-    color: blue;
-    border-radius: 5px;
-
+.carousel-caption {
+  color: blue;
+  border-radius: 5px;
 }
-
 
 img {
-    height: 7rem;
-    width: 60%;
+  height: 7rem;
+  width: 60%;
 }
 
 .card {
-    transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .bi {
-    color: rgb(29, 29, 104);
-
+  color: rgb(29, 29, 104);
 }
 
-
 .fix-img {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
 }
 
 /* Styles for screens larger than 1200px */
-@media (min-width: 1200px ) and (margin:0) {
+@media (min-width: 1200px) and (margin: 0) {
   .container-fluid {
     max-width: 1140px;
     margin: 0 auto;
@@ -84,7 +78,7 @@ img {
   .row-cols-2 {
     column-count: 1;
   }
-  
+
   .carousel-caption {
     text-align: center;
   }
