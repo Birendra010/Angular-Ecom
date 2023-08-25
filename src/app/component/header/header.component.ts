@@ -32,9 +32,11 @@ export class HeaderComponent {
       let items = JSON.parse(cart);
       this.count = 0;
       if (items) {
-        items.cart.items.forEach((x: any) => {
-          return (this.count += x.quantity);
-        });
+        if (items.cart) {
+          items.cart.items.forEach((x: any) => {
+            return (this.count += x.quantity);
+          });
+       }
       }
     }
 
@@ -64,6 +66,7 @@ export class HeaderComponent {
 
   logout() {
     this.count = 0;
+    localStorage.clear()
     this.cartService.cartData = '';
     this.userService.logout();
   }

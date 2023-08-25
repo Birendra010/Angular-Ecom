@@ -225,17 +225,16 @@
 
 
 
-<nav class="navbar navbar-expand-md navbar-light bg-light flex-md-nowrap ">
+<nav class="navbar navbar-expand-md navbar-light bg-light d-flex flex-row-reverse ">
   <div class="container-fluid flex-row-reverse  flex-nowrap ">
-
+<!-- search input -->
     <div class="d-flex flex-md-row justify-content-between   ">
-      <div style="height: 2rem; max-width: 18rem; margin-right: 1rem">
+      <div style="height: 2rem; max-width: 18rem; margin-left: 1rem; z-index:500;">
         <div class="w-100" style="  display: flex;  height: 2rem;  border: 1.5px solid;  border-radius: 10px; ">
           <input type="text" #searchInput (keyup)="searchProduct($event)" (keyup.enter)="search(searchInput.value)"
-            (blur)="hideSearch()" placeholder="Search for products" style="  width: 100%;  padding: 3px;  outline: none;  border: 0;  border-radius: 10px;" />
+            (blur)="hideSearch()" placeholder="Search for products" style="  width: 100%;  padding: 3px;  outline: none;  border: 0;  border-radius: 10px; " />
           <span style="cursor: pointer" (click)="search(searchInput.value)"><i class="bi bi-search p-2"></i></span>
         </div>
-
         <ul class="suggested-search" style="  background-color: rgb(217, 217, 217);  max-height: 15rem;  z-index: 100;  overflow-y: hidden;  z-index: 100;  position: relative;  cursor: pointer;"
         class="card mx-auto shadow-lg p-2 w-100 text-truncate gap-1" *ngIf="searchResult">
           <li class="p-2" *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item._id)">
@@ -272,37 +271,46 @@
         </i>
       </div>
       <div class="position-relative">
-        <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 4px; right: -18px">
+        <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 4px; z-index:500; right: -18px">
           {{ count }}
         </span>
-        <span style="margin-right: 10px"><i class="bi bi-cart" title="Cart" style="cursor: pointer" routerLink="/cart">
+        <span style="margin-right: 10px"><i class="bi bi-cart" title="Cart" style="cursor: pointer; z-index:500; position: sticky; " routerLink="/cart">
           </i></span>
       </div>
     </div>
 
     <!-- collapse  navbar  -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    <button  class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" ></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto my-2 my-lg-0  " style="--bs-scroll-height: 100px z-index: 50;">
-        <li class="nav-item">
-          <button class="nav-link " routerLink="/">Home</button>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " routerLink="/products">Products </a>
-        </li>
-
-        <li class="nav-item ">
-          <a class="nav-link " routerLink="/contact">contact-us </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link " routerLink="/about">About </a>
-        </li>
-      </ul>
-    </div>
+   
 
 
   </div>
+
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav me-auto my-2 my-lg-0 p-3 p-md-0 w-100 " style="--bs-scroll-height: 100px; z-index:150; position: absolute;
+    background: white; ">
+      <li class="nav-item">
+        <a class="nav-link " routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " routerLink="/products">Products </a>
+      </li>
+  
+      <li class="nav-item ">
+        <a class="nav-link " routerLink="/contact">contact-us </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link " routerLink="/about">About </a>
+      </li>
+        <li class="nav-item ">
+          <a class="nav-link " routerLink="/track">track-order </a>
+        </li>
+    </ul>
+  </div>
 </nav>
+
+

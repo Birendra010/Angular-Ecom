@@ -1,8 +1,10 @@
 .card-text {
   max-width: 30rem;
-  height: 3rem;
+  height: rem;
   overflow-y: hidden;
+  font-size: 15px;
 }
+
 .loader {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -13,4 +15,22 @@
 }
 .loader > div {
   margin-top: 16rem;
+}
+
+
+
+.card-title{
+  font-size: 16px;
+  color: blue;
+}
+.badge{
+      width: 6rem;
+    height: 2rem;
+    margin-top: 2px;
+    padding-top: 9px;
+    cursor: pointer;
+    /* color: white; */
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1;
 }

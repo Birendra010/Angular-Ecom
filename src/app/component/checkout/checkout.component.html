@@ -116,7 +116,9 @@
     <div class="summery">
       <span style="margin-left: 2px;">Subtotal</span>
       <!-- {{cartDetails | json }} -->
-      <span>{{cartDetails.totalPrice}}$</span>
+      <span>{{cartDetails.totalPrice}}
+        <i class="bi bi-currency-rupee"></i>
+      </span>
     </div>
     <div class="summery">
       <span>Total Items</span>
@@ -129,7 +131,9 @@
     <hr>
     <div class="summery">
       <span>Total : </span>
-      <span> {{cartDetails.totalPrice}}$</span>
+      <span> {{cartDetails.totalPrice}}
+        <i class="bi bi-currency-rupee"></i>
+      </span>
     </div>
     <app-stripe [order]="cartDetails" [form]="form.value" [formStatus]=" form.status"></app-stripe>
   </div>

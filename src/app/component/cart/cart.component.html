@@ -14,21 +14,21 @@
         <h1>Shopping Cart</h1>
         <div>
             <div *ngFor="let items of items"
-                class="d-flex flex-row gap-2 p-2 mt-1 justify-content-between border shadow-lg">
+                class="d-flex flex-row gap-1 p-1 mt-1 justify-content-between border shadow-lg">
                 <div class="d-flex flex-row gap-2">
                   
 
                     <img src="{{ items.productId.thumbnail }}" alt="{{ items.productId.title }}"
-                        style="width: 5rem; height: 5.5rem; object-fit: fill" />
+                        style="width: 5rem; height: 5.5rem;  " />
                     <div>
-                        <h5>{{ items.productId.title }}</h5>
-                        <h6 style="height: 2.2rem; overflow-y: hidden">
+                        <p style="margin: 0; padding: 0;   font-size: 18px; color: blue ;">{{ items.productId.title }}</p>
+                        <p style="height:2rem; overflow-y: hidden; font-size: 12px; ">
                             {{ items.productId.description }}
-                        </h6>
+                        </p>
                         <div class="quantityBtn">
                             <i class="bi bi-dash-lg px-2 bg-danger mx-1 rounded"
                                 (click)="cartUpdate(items.productId, items.quantity - 1)"></i>
-                            <input type="text" style="width: 50px; height: 20px" value="{{ items.quantity }}"
+                            <input type="text" style="width: 30px; height: 23px;" value="{{ items.quantity }}"
                                 disabled />
                             <i class="bi bi-plus-lg px-2 bg-primary mx-1 rounded"
                                 (click)="cartUpdate(items.productId, items.quantity + 1)"></i>
@@ -38,9 +38,9 @@
                         
                     </div>
                 </div>
-                <span style="  width: 8.5rem;  margin: 2px;  display: flex;  flex-direction: column;  justify-content: space-between;  text-align: right;">
+                <span class="Cartsummery">
                     <span>
-                        <i class="bi bi-currency-dollar"></i>
+                        <i class="bi bi-currency-rupee"></i>
                         <span>{{ items.productId.price }} * {{ items.quantity }}</span>
                     </span>
                     <i class="bi bi-trash text-danger" title="Delete" (click)="cartUpdate(items.productId, 0)"></i>
@@ -49,11 +49,14 @@
         </div>
     </div>
 
-    <div style=" min-width: 16rem; max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 50px; margin-left: 5rem;">
+    <div style=" max-width: 25rem; min-width: 16rem; background-color: white; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center; margin-top: 50px; margin-left: 5rem;">
         <h2>Cart Summery</h2>
         <div class="summery">
             <span>Subtotal</span>
-            <span>{{ cartDetails.cart.totalPrice }}$</span>
+            
+            <span>{{ cartDetails.cart.totalPrice }}
+                <i class="bi bi-currency-rupee"></i>
+            </span>
         </div>
         <div class="summery">
             <span>Total Items</span>
@@ -66,7 +69,10 @@
         <hr />
         <div class="summery">
             <span>Total</span>
-            <span>{{ cartDetails.cart.totalPrice }}$</span>
+            
+            <span>{{ cartDetails.cart.totalPrice }}
+                <i class="bi bi-currency-rupee"></i>
+            </span>
         </div>
         <button class="btn btn-primary w-75 m-auto mt-3 mb-2" routerLink="/checkout">
             Procced to checkout

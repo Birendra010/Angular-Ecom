@@ -31,9 +31,12 @@ export class CartService {
     // console.log(cart);
 
     if (!localStorage.getItem('token') || !this.loggerService.isLogged) {
+      
       if (cart) {
+        // console.log(cart.length)
+        // console.log("jgrier",localStorage.length)
         this.cartData = JSON.parse(cart);
-        console.log(this.cartData);
+        // console.log(this.cartData);
 
         localStorage.setItem('cart', JSON.stringify(this.cartData));
         this.toastr.success('item added to cart');
@@ -53,8 +56,12 @@ export class CartService {
 ///save data local to db after login
   saveLocalCartData() {
     let cart = localStorage.getItem('cart');
+    // console.log(cart?.length);
+    
     if (cart) {
       cart = JSON.parse(cart)
+      console.log(cart);
+      
       this.http
         .put(this.url + '/local-cart', this.cartData)
         .subscribe((response: any) => {

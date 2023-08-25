@@ -3,7 +3,7 @@
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-<!-- {{orderDetail | json}} -->
+
 
 <h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
 
@@ -21,11 +21,11 @@
 
                     </div>
                     <div class="ms-auto d-flex flex-column justify-content-between">
-                        <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} * {{item.quantity }} </span>
+                        <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} * {{item.quantity }} </span>
 
 
                         <button style="min-width: 6rem;"
-                            *ngIf="item.canceled ===false && orderDetail.status!== 'canceled'"
+                            *ngIf="  isLogged && item.canceled ===false && orderDetail.status!== 'canceled'"
                             class="btn btn-danger btn-sm " (click)="cancelItem(item.productId._id)">Cancel
                             Item</button>
                         <span class="badge text-bg-danger " *ngIf="item.status === true ">{{item.status}}</span>
@@ -34,8 +34,8 @@
                 </div>
             </div>
         </div>
-        <button class="cancel btn btn-primary mx-4 "
-            *ngIf="orderDetail && orderDetail.status!=='canceled' && orderDetail.totalItems >= 1 "
+        <button class="cancel btn btn-primary mx-4    "
+            *ngIf=" isLogged &&  orderDetail && orderDetail.status!=='canceled' && orderDetail.totalItems >= 1 "
             (click)="orderCancel(orderDetail._id)">Cancel Order</button>
     </div>
     <div class="summery card" style="padding-right: 6rem;" *ngIf="orderDetail.items && orderDetail.totalItems >= 1 ">
@@ -43,8 +43,8 @@
         <h2 class=" ">Order Summery</h2>
         <div>
             <div><span>TotalItems</span><span style="margin-left: 6rem;"> {{orderDetail.totalItems}} </span></div>
-            <div><span>TotalPrice</span><span style="margin-left: 6rem;">{{orderDetail.totalPrice}}<i
-                        class="bi bi-currency-dollar"></i></span></div>
+            <div><span>TotalPrice</span><span style="margin-left: 6rem;">{{orderDetail.totalPrice}}<i class="bi bi-currency-rupee"></i>
+                      </span></div>
         </div>
         <div id="address-details cart">
             <h5 style="margin-left: 2rem;">Delivered to :</h5>

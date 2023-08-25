@@ -1,15 +1,25 @@
-
 /* Center the loader */
 .loader {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* Style the cart items container */
-.p-4 {
+/* .p-4 {
   background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 5px;
   padding: 20px;
+} */
+
+.Cartsummary {
+  padding: 1rem;
+  width: 8.5rem;
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  
 }
 
 /* Style the individual cart item */
@@ -27,7 +37,6 @@
   align-items: center;
   margin-top: 6px;
 }
-
 
 /* Style the cart summary container */
 .summery {
@@ -48,7 +57,10 @@
 }
 
 /* Additional styling for the cart */
-h1, h2, h5, h6 {
+h1,
+h2,
+h5,
+h6 {
   margin: 0;
 }
 
@@ -58,8 +70,4 @@ h1, h2, h5, h6 {
     flex-direction: column;
     align-items: center;
   }
-
-
-
-
 }

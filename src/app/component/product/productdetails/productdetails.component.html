@@ -1,8 +1,8 @@
 <div class="container-fluid mt-2;" style="margin-left: 5rem; margin-top: 3rem;">
   <div *ngIf="product" class="d-flex flex-column flex-md-row gap-5">
     <div>
-      <div style="height: 350px; width: 400px; ">
-        <img src="{{ image || product.thumbnail }}" alt="" style="height: 100% ; display: flex; " class="img-fluid" />
+      <div style="height: 350px; max-width: 400px; ">
+        <img src="{{ image || product.thumbnail }}" alt="" style="height: 100% ; display: flex;  " class="img-fluid" />
       </div>
       <div class="d-flex flex-row mt-2 " style="width: 350px;; height: 8rem; overflow-x: scroll; cursor: pointer; ">
         <img src="{{ url }}" alt="" *ngFor="let url of product.images" (click)="showimage(url)" />
@@ -14,7 +14,7 @@
       <p>{{ product.description }}</p>
       <p>{{ product.category }}</p>
 
-      <p class="text-danger">${{ product.price }}</p>
+      <p class="text-danger"><i class="bi bi-currency-rupee"></i>{{ product.price }}</p>
 
       <p class="bi bi-star text-primary">{{ product.rating }}</p>
 

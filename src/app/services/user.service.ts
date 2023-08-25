@@ -55,7 +55,7 @@ export class UserService {
     // this.loading = true;
 
     localStorage.clear();
-    this.cartService.cartData = ' ';
+    this.cartService.cartData = [];
     this.loggerService.isLogged = false;
     // this.toastr.success('logout seccessfully');
     // setTimeout(() => {

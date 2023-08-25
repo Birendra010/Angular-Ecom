@@ -18,7 +18,7 @@ align-items: center;">
                 <div class="d-flex flex-row gap-2 w-40">
                     <img src="{{orders.items[0].productId.thumbnail}}" alt="" style="height: 5rem; width: 5rem;">
                     <div class="d-flex flex-column w-40 ">
-                        <h5 class="card-title">{{orders.items[0].productId.title}}</h5>
+                        <h5 class="card-title ">{{orders.items[0].productId.title}}</h5>
                         <span class="card-text">{{orders.items[0].productId.description}}</span>
                         <small class="text-primary " *ngIf="orders.items.length > 1 "> +{{orders.items.length -1 }}
                             more</small>
@@ -28,12 +28,11 @@ align-items: center;">
                 <div class="ms-auto d-flex flex-column justify-content-between ">
 
                     <span class="badge "
-                        style="width: 6rem; height: 2rem; margin-top: 2px; font-size: medium; padding-top: 5px; cursor: pointer;"
                         [class.bg-warning]="orders.status ==='delivered'"
                         [class.bg-success]="orders.status ==='completed'"
                         [class.bg-danger]="orders.status ==='canceled'">
 
-                        {{orders.status}}
+                        {{orders.status | titlecase}}
                     </span>
 
 

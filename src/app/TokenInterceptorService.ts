@@ -31,14 +31,14 @@ export class TokenInterceptorService implements HttpInterceptor {
         if (err.status === 500) {
           this.userService.logout();
         }
-        if (err.status === 409 || err.status === 401 ) {
+        if ( err.status === 401 ) {
           this.toastr.error(err.error.message) 
           this.userService.logout()
-        } else if (err.status === 400 || err.status === 404) {
+        } else if (err.status === 400 || err.status === 404 || err.status === 409 || err.status === 403  ) {
           this.toastr.error(err.error.message); 
           
         }
-        const error = err.message||  err.error.message || err.statusText;
+        const error =   err.error.message || err.statusText;
         return throwError(error);
       })
     );

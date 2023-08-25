@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoggerService } from 'src/app/services/logger.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -10,15 +11,17 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderdetailsComponent {
   constructor(
     private router: ActivatedRoute,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private loggerService: LoggerService
   ) {}
   loading: boolean = false;
   orderDetail: any;
   orderId: any;
+  isLogged: boolean = false;
 
   ngOnInit(): void {
+    this.isLogged = this.loggerService.isLogged;
     this.orderId = this.router.snapshot.paramMap.get('orderId');
-
     if (this.orderId) {
       this.orderService.getOrderDetails(this.orderId).subscribe((data: any) => {
         if (data) {
@@ -41,6 +44,9 @@ export class OrderdetailsComponent {
           this.loading = false;
         }
       });
+    setTimeout(() => {
+        this.loading = false;
+    }, 2000);
   }
 
   orderCancel(id: string) {
@@ -51,5 +57,8 @@ export class OrderdetailsComponent {
         this.loading = false;
       }
     });
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
   }
 }

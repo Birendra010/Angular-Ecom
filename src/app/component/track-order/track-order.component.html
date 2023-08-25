@@ -1,6 +1,6 @@
 
 <div class=" pt-5 m-2">
-    <div class="card" style="max-width: 22rem; margin: auto;">
+    <div class="card" style="max-width: 22rem; margin: auto; z-index: 200;">
         <div class="card-body text-center">
             <h4>Track your order here</h4>
             <div class="form-floating mt-4 mb-3">
@@ -16,7 +16,7 @@
         <div class="d-flex flex-column gap-1">
             <h2>Customer Details</h2>
             <span>Name : {{order.shippingInfo.name}}</span>
-            <span>Email : {{order.email}}</span>
+            <!-- <span>Email : {{order.email}}</span> -->
             <br>
             <span class="text-bg-primary rounded-pill"
                 style="width: max-content; padding: 5px 3rem;">{{order.status}}</span>
@@ -48,7 +48,7 @@
                     <span class="card-text">{{item.productId.description}}</span>
                 </div>
                 <div class="ms-auto d-flex flex-column justify-content-between">
-                    <span><i class="bi bi-currency-dollar"></i>{{item.productId.price}} x {{item.quantity}}</span>
+                    <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
                 </div>
             </div>
         </div>

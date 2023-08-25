@@ -44,7 +44,7 @@ const routes: Routes = [
   { component: CheckoutComponent, path: 'checkout' },
 
   { component: OrderComponent, path: 'order', canActivate: [AuthGuard] },
-  { component: OrderdetailsComponent, path: 'order/:orderId', canActivate: [AuthGuard],},
+  { component: OrderdetailsComponent, path: 'order/:orderId'},
   { component: TrackOrderComponent, path: 'track' },
   
   {component:WishlistComponent , path:'wishlist', canActivate:[AuthGuard]},
